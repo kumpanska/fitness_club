@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="LogInAsClient" Height="450" Width="800">
-    <Grid Background="">
-        
+        Title="LogInAsClient" Height="607" Width="603" MinHeight="550" MinWidth="540">
+    <Grid Background="Brown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="257"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Margin="10,10,10,10"
+                     Background="SeaShell" FontSize="16" Foreground="Black" />
+            <TextBox Margin="10,10,10,10"
+                     FontSize="16" Padding="5"
+                     Background="SeaShell" Foreground="Black" Grid.Column="1" />
+        </Grid>
+        <Grid Grid.Row="1" Margin="10,0,0,51">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Margin="4,20,16,0"
+                     Background="SeaShell" FontSize="16" Foreground="Black" />
+            <Button Content="Зберегти і закрити" Width="150" Height="40"
+                        Background="SeaShell" Foreground="Black" FontWeight="DemiBold" Grid.Column="1" Margin="24,100,24,139"/>
+            <Button Content="Відмінити і закрити" Width="150" Height="40"
+                        Background="SeaShell" Foreground="Black" FontWeight="DemiBold" Grid.Column="1" Margin="24,186,24,47"/>
+        </Grid>
     </Grid>
 </Window>
