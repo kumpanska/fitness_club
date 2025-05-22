@@ -1,19 +1,14 @@
 ﻿<Window x:Class="fitness_club.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:fitness_club"
-        mc:Ignorable="d"
-        Title="FitnessClub" Height="600" Width="1100" MinHeight="600" MinWidth="900">
+        Title="FitnessClub" Height="524" Width="600" MinHeight="300" MinWidth="300">
 
     <Window.Resources>
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="10">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -22,54 +17,72 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="White">
+    <Grid Background="SeaShell">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition x:Name="LeftPanelColumn" Width="*" />
+            <ColumnDefinition x:Name="RightPanelColumn" Width="0" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Background="Moccasin"/>
-        <Button Grid.Column="0" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
-                Content="Реєстрація тренера" Foreground="Black" FontSize="18" FontWeight="DemiBold"
-                Width="180" Height="60" VerticalAlignment="Top" Margin="0,168,0,0" HorizontalAlignment="Center"/>
-
-        <Button Grid.Column="0" Background="DarkSalmon" Style="{StaticResource RoundedButtonStyle}" 
-                Content="Ввійти як тренер" Foreground="Black" FontSize="18" FontWeight="DemiBold"
-                Width="180" Height="60" VerticalAlignment="Top" Margin="0,254,0,0" HorizontalAlignment="Center"/>
-
-        <Button Grid.Column="0" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
-                Content="Реєстрація клієнта" Foreground="Black" FontSize="18" FontWeight="DemiBold"
-                Width="180" Height="60" VerticalAlignment="Top" Margin="0,338,0,0" HorizontalAlignment="Center"/>
-
-        <Button Grid.Column="0" Background="DarkSalmon" Style="{StaticResource RoundedButtonStyle}" 
-                Content="Ввійти як клієнт" Foreground="Black" FontSize="18" FontWeight="DemiBold"
-                Width="180" Height="60" VerticalAlignment="Top" Margin="0,425,0,0" HorizontalAlignment="Center"/>
-
-        <TextBlock Text="Fitness Club"
-                   FontSize="25"
-                   FontWeight="Black"
-                   Margin="10"
-                   Foreground="Black"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Left"
-                   Grid.Column="0"/>
-        <Grid Grid.Column="1" Background="SeaShell">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button Grid.Column="0" Grid.Row="1" Background="CadetBlue" Style="{StaticResource RoundedButtonStyle}" Content="Комплекс вправ" Foreground="Black" FontSize="20" FontWeight="DemiBold" Width="160" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="1" Grid.Row="1" Background="Black" Style="{StaticResource RoundedButtonStyle}" Content="Клієнти"  Foreground="White" FontSize="20" FontWeight="DemiBold" Width="160" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="2" Grid.Row="1" Background="Goldenrod" Style="{StaticResource RoundedButtonStyle}" Content="Тренери"  Foreground="Black" FontSize="20" FontWeight="DemiBold"  Width="160" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="3" Grid.Row="1"  Background="Brown" Style="{StaticResource RoundedButtonStyle}" Content="Розклад занять"  Foreground="White" FontSize="20" FontWeight="DemiBold" Width="160" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button Grid.Column="4" Grid.Row="1" Background="Plum" Style="{StaticResource RoundedButtonStyle}" Content="Рейтинг тренерів"  Foreground="Black" FontSize="19" FontWeight="DemiBold"  Width="160" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Fitness Club"
+            FontSize="25"
+            FontWeight="Black"
+            Foreground="Brown"
+            HorizontalAlignment="Left"
+            Margin="10,10,0,20"/>
+            <StackPanel x:Name="LeftPanelStack" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                <Button Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
+                        Content="Реєстрація тренера" Foreground="Black" FontSize="18" FontWeight="DemiBold"
+                        Width="180" Height="60" Margin="0,10"/>
+                <Button Background="Brown" Style="{StaticResource RoundedButtonStyle}" 
+                        Content="Ввійти як тренер" Foreground="White" FontSize="18" FontWeight="DemiBold"
+                        Width="180" Height="60" Margin="0,10"/>
+                <Button Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
+                        Content="Реєстрація клієнта" Foreground="Black" FontSize="18" FontWeight="DemiBold"
+                        Width="180" Height="60" Margin="0,10"/>
+                <Button Background="Brown" Style="{StaticResource RoundedButtonStyle}" 
+                        Content="Ввійти як клієнт" Foreground="White" FontSize="18" FontWeight="DemiBold"
+                        Width="180" Height="60" Margin="0,10"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" x:Name="RightPanel" Background="SeaShell" Margin="10" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Меню"
+                       FontSize="25"
+                       FontWeight="Black"
+                       Foreground="Brown"
+                       Margin="0,10,0,20"
+                       Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Button Grid.Row="1" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
+                    Content="Комплекс вправ" Foreground="Black" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
+            <Button Grid.Row="2" Background="Brown" Style="{StaticResource RoundedButtonStyle}" 
+                    Content="Клієнти" Foreground="White" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
+            <Button Grid.Row="3" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
+                    Content="Тренери" Foreground="Black" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
+            <Button Grid.Row="4" Background="Brown" Style="{StaticResource RoundedButtonStyle}" 
+                    Content="Розклад занять" Foreground="White" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
+            <Button Grid.Row="5" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
+                    Content="Рейтинг тренерів" Foreground="Black" FontSize="19" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
+        </Grid>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="SandwichButton" Background="Brown" Style="{StaticResource RoundedButtonStyle}"
+                        Content="≡" Foreground="White" FontSize="19" FontWeight="DemiBold"
+                        Width="48" Height="40" Margin="0,0,5,0" Click="SandwichButton_Click"/>
+                <Button x:Name="BackButton" Background="Brown" Style="{StaticResource RoundedButtonStyle}"
+                        Content="↩" Foreground="White" FontSize="19" FontWeight="DemiBold"
+                        Width="48" Height="40" Visibility="Hidden" Click="BackButton_Click"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

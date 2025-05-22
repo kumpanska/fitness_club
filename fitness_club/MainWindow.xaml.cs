@@ -20,5 +20,25 @@ namespace fitness_club
         {
             InitializeComponent();
         }
+        private void SandwichButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeftPanelStack.HorizontalAlignment = HorizontalAlignment.Left;
+            LeftPanelColumn.Width = new GridLength(1, GridUnitType.Star);
+            RightPanelColumn.Width = new GridLength(1, GridUnitType.Star);
+            RightPanel.Visibility = Visibility.Visible;
+            SandwichButton.Visibility = Visibility.Hidden;
+            BackButton.Visibility = Visibility.Visible;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeftPanelStack.HorizontalAlignment = HorizontalAlignment.Center;
+            LeftPanelColumn.Width = new GridLength(1, GridUnitType.Star);
+            RightPanelColumn.Width = new GridLength(0);
+            RightPanel.Visibility = Visibility.Collapsed;
+            SandwichButton.Visibility = Visibility.Visible;
+            BackButton.Visibility = Visibility.Hidden;
+        }
+
     }
 }
