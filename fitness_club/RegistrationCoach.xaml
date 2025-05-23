@@ -70,6 +70,6 @@ Foreground="Black"
 VerticalAlignment="Top"
 HorizontalAlignment="Left"
 Grid.Column="1" Width="344" Height="47"/>
-        <Button  Content="Регістрація" FontSize="25" FontWeight="Black" Foreground="White" Background="DarkRed" Margin="291,121,309,25" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Button  Content="Реєстрація" FontSize="25" FontWeight="Black" Foreground="White" Background="DarkRed" Margin="291,121,309,25" Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
