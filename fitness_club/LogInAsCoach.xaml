@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="LogInAsCoach" Height="450" Width="800">
-    <Grid Background="">
-        
+        Title="LogInAsCoach" Height="607" Width="750" MinHeight="550" MinWidth="700">
+
+    <Grid Background="Brown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,10" VerticalAlignment="Center">
+            <TextBlock Text="Клієнт:" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox Name="ClientComboBox" Width="300" Height="30" FontSize="16"
+                      Background="White" Foreground="Black"
+                      DisplayMemberPath="Name" SelectedValuePath="Id"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                <TextBlock Text="Доступні вправи" FontSize="16" Foreground="White" Margin="0,0,0,5"/>
+                <ListBox Background="White" FontSize="14" Name="AvailableExercisesList" Height="451" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="+" Width="40" Height="40" FontSize="18" Margin="0,5"/>
+                <Button Content="-" Width="40" Height="40" FontSize="18" Margin="0,5"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Margin="10,0,0,0">
+                <TextBlock Text="Комплекс клієнта" FontSize="16" Foreground="White" Margin="0,0,0,5"/>
+                <ListBox Background="White" FontSize="14" Name="ClientPlanList" Height="453" />
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,10,10">
+            <Button Content="Зберегти і закрити" Width="170" Height="40"
+                    Background="White" FontWeight="DemiBold" Margin="5,0"/>
+            <Button Content="Відмінити і закрити" Width="170" Height="40"
+                    Background="White" FontWeight="DemiBold" Margin="5,0"/>
+        </StackPanel>
     </Grid>
 </Window>
