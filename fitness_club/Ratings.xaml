@@ -1,0 +1,21 @@
+﻿<Window x:Class="fitness_club.Ratings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:fitness_club"
+        mc:Ignorable="d"
+        Title="Рейтинг тренерів" Height="450" HorizontalContentAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <Grid Background="LightSalmon" >
+        <TextBlock Text="Рейтинг тренерів" FontSize="18" FontWeight="DemiBold" Foreground="Black" Margin="0,0,0,10" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <ListView Name="RatingsListView" Margin="100,30,100,10" FontSize="14" Width="600" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Прізвище та ім'я тренера" Width="300" DisplayMemberBinding="{Binding CoachName}"/>
+                    <GridViewColumn Header="Оцінка тренера" Width="300" DisplayMemberBinding="{Binding AverageRating}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

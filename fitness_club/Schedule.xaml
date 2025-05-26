@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="Schedule" Height="450" Width="800">
-    <Grid>
-        
+        Title="Розклад занять" Height="450" Width="800" MinHeight="400" MinWidth="700" HorizontalContentAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <Grid Background="Brown">
+        <TextBlock Text="Розклад занять з тренерами" 
+                   FontSize="18" FontWeight="DemiBold"
+                   Foreground="White" Margin="10,0,0,10" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <ListView Name="ScheduleListView" Margin="93,30,71,70" FontSize="14" Background="White">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Прізвище та ім'я тренера" Width="200" DisplayMemberBinding="{Binding CoachName}"/>
+                    <GridViewColumn Header="День" Width="100" DisplayMemberBinding="{Binding Day}"/>
+                    <GridViewColumn Header="Час" Width="100" DisplayMemberBinding="{Binding Time}"/>
+                    <GridViewColumn Header="Заняття" Width="250"  DisplayMemberBinding="{Binding Activity}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Додати / Редагувати" Width="150" Height="30" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="EditSchedule_Click"/>
     </Grid>
 </Window>

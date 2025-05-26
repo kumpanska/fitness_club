@@ -1,0 +1,44 @@
+﻿<Window x:Class="fitness_club.ClientForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:fitness_club"
+        mc:Ignorable="d"
+        Title="Форма клієнта" Height="607" Width="750" MinHeight="550" MinWidth="700">
+    <Grid Background="Brown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="20,35,20,0" VerticalAlignment="Top">
+            <TextBlock Text="Клієнт:" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox Name="ClientComboBox"
+                      Width="247" Height="30" FontSize="16"
+                      DisplayMemberPath="Name" SelectedValuePath="Id"
+                      />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="354,60,30,0" VerticalAlignment="Top" Grid.RowSpan="2">
+            <TextBlock Text="Ваш тренер:" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox Name="CoachComboBox"
+                      Width="250" Height="30" FontSize="16"
+                      DisplayMemberPath="Name" SelectedValuePath="Id"
+                     />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Text="Ваш комплекс вправ:" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
+            <ListBox Name="ExerciseListBox" FontSize="14" Background="White" Height="292"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="20,391,-20,20" Grid.Row="1">
+            <TextBlock Text="Оцінити тренера (0-5 балів):" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox Name="RatingTextBox" Width="60" Height="30" FontSize="16"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,20,10">
+            <Button Content="Зберегти і закрити" Width="170" Height="40"
+                    Background="White" FontWeight="DemiBold" Margin="5,0"/>
+            <Button Content="Відмінити і закрити" Width="170" Height="40"
+                    Background="White" FontWeight="DemiBold" Margin="5,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

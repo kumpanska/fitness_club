@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="Exercises" Height="450" Width="800">
-    <Grid>
-        
+        Title="Комплекс вправ" Height="450" Width="800" MinHeight="400" MinWidth="700">
+    <Grid Background="LightSalmon">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Доступні вправи:"
+                   FontSize="16" FontWeight="DemiBold" Foreground="Black"
+                   Margin="10" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+        <ListView Name="ExercisesListView" Background="SeaShell" FontSize="14" Margin="127,0,0,0" Grid.Row="1" HorizontalAlignment="Left" SelectionChanged="ExercisesListView_SelectionChanged" Width="542" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Назва вправи" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Тип вправи" Width="150" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Кількість повторень" Width="150" DisplayMemberBinding="{Binding Repetitions}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" Grid.Row="2">
+            <Button x:Name="AddButton" Content="Додати вправу" Width="100" Margin="5" Click="AddExercise_Click"/>
+            <Button x:Name="EditButton" Content="Редагувати вправу" Width="114" Margin="5" IsEnabled="False" Click="EditExercise_Click"/>
+            <Button x:Name="DeleteButton" Content="Видалити вправу" Width="100" Margin="5" IsEnabled="False" Click="DeleteExercise_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
