@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Доступні вправи:"
+        <TextBlock Text="Комплекс вправ"
                    FontSize="16" FontWeight="DemiBold" Foreground="Black"
                    Margin="10" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
