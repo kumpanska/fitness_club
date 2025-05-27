@@ -40,5 +40,36 @@ namespace fitness_club
             BackButton.Visibility = Visibility.Hidden;
         }
 
+        private void OpenRegistrationClientForm_Click(object sender, RoutedEventArgs e)
+        {
+            var registrationClientWindow = new RegistrationClient();
+            registrationClientWindow.Owner = this;
+            registrationClientWindow.ShowDialog();
+        }
+        private void OpenRegistrationCoachForm_Click(object sender, RoutedEventArgs e)
+        {
+            var registrationCoachWindow = new RegistrationCoach();
+            registrationCoachWindow.Owner = this;
+            registrationCoachWindow.ShowDialog();
+        }
+        private void OpenExercisesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var exercisesWindow = new Exercises();
+            exercisesWindow.Owner = this;
+            exercisesWindow.ShowDialog();
+        }
+        private void OpenCoachFormManagement_Click(object sender, RoutedEventArgs e)
+        {
+            var coachManagementWindow = new CoachForm();
+            coachManagementWindow.Owner = this;
+            coachManagementWindow.ShowDialog();
+        }
+        private void OpenClientFormManagement_Click(object sender, RoutedEventArgs e)
+        {
+            var clientManagementWindow = new ClientForm();
+            clientManagementWindow.Owner = this;
+            clientManagementWindow.ShowDialog();
+        }
     }
 }
+
