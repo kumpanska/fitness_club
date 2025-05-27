@@ -11,6 +11,7 @@ namespace fitness_club
         private int id;
         private string? name;
         private string? lastName;
+        private string? middleName;
         private string? phoneNumber;
         private string? email;
         public int Id
@@ -27,6 +28,11 @@ namespace fitness_club
         {
             get { return lastName; }
             set { lastName = value; }
+        }
+        public string? MiddleName
+        {
+            get { return middleName; }
+            set { middleName = value; }
         }
         public string? PhoneNumber
         {

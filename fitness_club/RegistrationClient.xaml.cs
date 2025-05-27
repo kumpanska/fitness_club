@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using Microsoft.Data.SqlClient;
+
+namespace fitness_club
+{
+    /// <summary>
+    /// Interaction logic for RegistrationClient.xaml
+    /// </summary>
+    public partial class RegistrationClient : Window
+    {
+        private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
+        public RegistrationClient()
+        {
+            InitializeComponent();
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClientClass client = new ClientClass {
+            Name = FirstNameText.Text.Trim(),
+            LastName = LastNameText.Text.Trim(),
+            PhoneNumber = PhoneNumberText.Text.Trim(),
+            Email = EmailText.Text.Trim()
+            };
+            if (string.IsNullOrWhiteSpace(client.Name) || string.IsNullOrWhiteSpace(client.LastName) ||
+               string.IsNullOrWhiteSpace(client.PhoneNumber) || string.IsNullOrWhiteSpace(client.Email))
+            {
+                MessageBox.Show("Усі поля обов'язкові до заповнення.");
+                return;
+            }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = @"
+                        INSERT INTO Table_Clients ([Name], [Last Name], [Phone Number], [Email])
+                        VALUES (@Name, @LastName, @PhoneNumber, @Email)";
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", client.Name);
+                        cmd.Parameters.AddWithValue("@LastName", client.LastName);
+                        cmd.Parameters.AddWithValue("@PhoneNumber", client.PhoneNumber);
+                        cmd.Parameters.AddWithValue("@Email", client.Email);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Клієнт успішно зареєстрований у БД!", "Успіх");
+                FirstNameText.Clear();
+                LastNameText.Clear();
+                PhoneNumberText.Clear();
+                EmailText.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Помилка під час запису в БД: " + ex.Message, "Помилка");
+            }
+        }
+    }
+}
