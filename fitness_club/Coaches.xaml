@@ -5,15 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="Список тренерів" Height="450" Width="441" MinHeight="400" MinWidth="420">
-    <Grid Background="LightSalmon">
-        <TextBlock Text="Список тренерів:" 
-                   FontSize="16" FontWeight="DemiBold" Foreground="Black"
-                   Margin="0,0,0,10"/>
-        <ListBox Name="CoachesListBox"
-                 Background="White"
-                 FontSize="14"
-                 DisplayMemberPath="Name"
-                 Margin="38,30,36,38"/>
+        Title="Список тренерів" Height="450" Width="1100" MinHeight="400" MinWidth="1000">
+    <Grid Background="LightSalmon" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Список тренерів" FontStyle="Normal"
+               FontSize="16" FontWeight="DemiBold" Foreground="Black"
+               Margin="10" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+        <ListView Name="CoachesListView" Background="SeaShell" FontSize="14" Margin="0,41,0,0" HorizontalAlignment="Center" SelectionChanged="CoachesListView_SelectionChanged" Width="956" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Прізвище" Width="200" DisplayMemberBinding="{Binding LastName}"/>
+                    <GridViewColumn Header="Ім'я" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="По батькові" Width="150" DisplayMemberBinding="{Binding MiddleName}"/>
+                    <GridViewColumn Header="Номер телефону" Width="150" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    <GridViewColumn Header="Пошта" Width="150" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn Header="Фітнес-послуги" Width="150" DisplayMemberBinding="{Binding FitnessServices}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" Grid.Row="2">
+            <Button x:Name="EditButton" Content="Редагувати інформацію про тренера" Width="213" Margin="5" IsEnabled="False" Click="EditCoach_Click"/>
+            <Button x:Name="DeleteButton" Content="Видалити тренера" Width="106" Margin="5" IsEnabled="False" Click="DeleteCoach_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
