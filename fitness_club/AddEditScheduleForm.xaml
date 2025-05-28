@@ -1,0 +1,35 @@
+﻿<Window x:Class="fitness_club.AddEditScheduleForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Редагування розкладу" Height="250" Width="400" MinHeight="200" MinWidth="350">
+    <Grid  Background="LightSalmon">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,5">
+            <TextBlock Text="Тренер: " Width="80" VerticalAlignment="Center" FontWeight="DemiBold"/>
+            <ComboBox x:Name="CoachComboBox" Width="250" DisplayMemberPath="FullName" SelectedValuePath="Id" SelectionChanged="CoachComboBox_SelectionChanged"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,5">
+            <TextBlock Text="Дата:" Width="80" VerticalAlignment="Center" FontWeight="DemiBold"/>
+            <DatePicker x:Name="DatePicker" Width="250"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,5">
+            <TextBlock Text="Час (HH:MM):" Width="80" VerticalAlignment="Center" FontWeight="DemiBold"/>
+            <TextBox x:Name="TimeBox" Width="200"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,5">
+            <TextBlock Text="Фітнес-послуги:" Width="80" VerticalAlignment="Center" FontWeight="DemiBold"/>
+            <ComboBox x:Name="FitnessServiceComboBox" Width="200" DisplayMemberPath="Name"
+          SelectedValuePath="id"/>
+        </StackPanel>
+
+        <Button Content="Зберегти" Background="White" Grid.Row="3" Width="100" HorizontalAlignment="Right" Margin="0,85,115,-75" Click="Save_Click"/>
+        <Button Content="Відмінити" Background="White" Grid.Row="3" Width="100" HorizontalAlignment="Right" Margin="0,85,10,-75" Click="Cancel_Click"/>
+    </Grid>
+</Window>
