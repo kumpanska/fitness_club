@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace fitness_club
+namespace fitness_club.Classes
 {
     public static class LoadExerciseTypesClass
     {

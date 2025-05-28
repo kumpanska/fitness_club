@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fitness_club
+namespace fitness_club.Classes
 {
     public class CoachClass : Person
     {
