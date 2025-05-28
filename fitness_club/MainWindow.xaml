@@ -66,9 +66,9 @@
             <Button Grid.Row="1" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
                     Content="Комплекс вправ" Foreground="Black" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0" Click="OpenExercisesButton_Click"/>
             <Button Grid.Row="2" Background="Brown" Style="{StaticResource RoundedButtonStyle}" 
-                    Content="Список клієнтів" Foreground="White" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
+                    Content="Список клієнтів" Foreground="White" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0" Click="OpenClientsButton_Click"/>
             <Button Grid.Row="3" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 
-                    Content="Список тренерів" Foreground="Black" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
+                    Content="Список тренерів" Foreground="Black" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0" Click="OpenCoachesButton_Click"/>
             <Button Grid.Row="4" Background="Brown" Style="{StaticResource RoundedButtonStyle}" 
                     Content="Розклад занять" Foreground="White" FontSize="20" FontWeight="DemiBold" Height="60" Margin="50,10,54,0"/>
             <Button Grid.Row="5" Background="LightSalmon" Style="{StaticResource RoundedButtonStyle}" 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace fitness_club
 {
-    class Person
+    public class Person
     {
         private int id;
         private string? name;
@@ -19,7 +19,7 @@ namespace fitness_club
             get { return id; }
             set {  id = value; }
         }
-        public string? Name 
+        public string? Name
         {
             get { return name; }
             set { name = value; }

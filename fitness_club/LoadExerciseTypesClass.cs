@@ -1,15 +1,13 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
+using System.Windows;
 
-namespace fitness_club.Classes
+namespace fitness_club
 {
     public static class LoadExerciseTypesClass
     {
@@ -23,6 +21,7 @@ namespace fitness_club.Classes
                 {
                     connection.Open();
                     string query = "SELECT DISTINCT [Type] FROM [Table_Exercises] WHERE [Type] IS NOT NULL AND [Type] <> ''";
+
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -42,6 +41,5 @@ namespace fitness_club.Classes
                 MessageBox.Show("Помилка при завантаженні типів вправ: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
     }
 }

@@ -70,6 +70,18 @@ namespace fitness_club
             clientManagementWindow.Owner = this;
             clientManagementWindow.ShowDialog();
         }
+        private void OpenCoachesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var coachesWindow = new Coaches();
+            coachesWindow.Owner = this;
+            coachesWindow.ShowDialog();
+        }
+        private void OpenClientsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var clientsWindow = new Clients();
+            clientsWindow.Owner = this;
+            clientsWindow.ShowDialog();
+        }
     }
 }
 
