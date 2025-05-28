@@ -1,0 +1,102 @@
+﻿using fitness_club.Classes;
+using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace fitness_club
+{
+    /// <summary>
+    /// Interaction logic for EditCoachInformationForm.xaml
+    /// </summary>
+    public partial class EditCoachInformationForm : Window
+    {
+        private readonly int coachId;
+        private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
+        public EditCoachInformationForm(CoachClass coach)
+        {
+            InitializeComponent();
+            LoadExerciseTypes();
+            coachId = coach.Id;
+            CoachNameText.Text = coach.Name;
+            CoachLastNameText.Text = coach.LastName;
+            CoachMiddleNameText.Text = coach.MiddleName;
+            CoachPhoneNumberText.Text = coach.PhoneNumber;
+            CoachEmailText.Text = coach.Email;
+            foreach(ComboBoxItem item in ExerciseTypeCbo.Items)
+            {
+                if (item.Content.ToString() == coach.FitnessServices)
+                {
+                    ExerciseTypeCbo.SelectedItem = item;
+                    break;
+                }
+            }
+        }
+        private void LoadExerciseTypes()
+        {
+            LoadExerciseTypesClass.LoadExerciseTypesIntoComboBox(ExerciseTypeCbo);
+        }
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            string name = CoachNameText.Text.Trim();
+            string lastName = CoachLastNameText.Text.Trim();
+            string middleName = CoachMiddleNameText.Text.Trim();
+            string phone = CoachPhoneNumberText.Text.Trim();
+            string email = CoachEmailText.Text.Trim();
+            string? fitnessServices = (ExerciseTypeCbo.SelectedItem as ComboBoxItem)?.Content.ToString();
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(lastName) ||
+       string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(fitnessServices))
+            {
+                MessageBox.Show("Будь ласка, заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = @"UPDATE [Table_Coaches]
+                             SET [Name] = @Name,
+                                 [Last Name] = @LastName,
+                                 [Middle Name] = @MiddleName,
+                                 [Phone Number] = @PhoneNumber,
+                                 [Email] = @Email,
+                                 [Fitness Services] = @FitnessServices
+                             WHERE [Id] = @Id";
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.Parameters.AddWithValue("@LastName", lastName);
+                    cmd.Parameters.AddWithValue("@MiddleName", middleName);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", phone);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@FitnessServices", fitnessServices);
+                    cmd.Parameters.AddWithValue("@Id", coachId);
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Інформацію про тренера оновлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                DialogResult = true;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Помилка збереженні: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
+    }
+}

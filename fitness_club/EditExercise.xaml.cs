@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using fitness_club.Classes;
 using Microsoft.Data.SqlClient;
 
 namespace fitness_club
@@ -40,33 +41,7 @@ namespace fitness_club
         }
         private void LoadExerciseTypes()
         {
-            ExerciseTypeComboBox.Items.Clear();
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = "SELECT DISTINCT [Type] FROM [Table_Exercises] WHERE [Type] IS NOT NULL AND [Type] <> ''";
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string? type = reader["Type"]?.ToString();
-                                if (!string.IsNullOrWhiteSpace(type))
-                                {
-                                    ExerciseTypeComboBox.Items.Add(new ComboBoxItem() { Content = type });
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Помилка при завантаженні типів вправ: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            LoadExerciseTypesClass.LoadExerciseTypesIntoComboBox(ExerciseTypeComboBox);
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {

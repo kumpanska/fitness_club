@@ -10,7 +10,7 @@
         <TextBlock Text="Розклад занять з тренерами" 
                    FontSize="18" FontWeight="DemiBold"
                    Foreground="White" Margin="10,0,0,10" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-        <ListView Name="ScheduleListView" Margin="93,30,71,366" FontSize="14" Background="White" SelectionChanged="ScheduleListView_SelectionChanged">
+        <ListView Name="ScheduleListView" Margin="93,30,71,122" FontSize="14" Background="White" SelectionChanged="ScheduleListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Тренер" Width="300" DisplayMemberBinding="{Binding CoachFullName}"/>

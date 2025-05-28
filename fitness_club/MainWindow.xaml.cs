@@ -82,6 +82,12 @@ namespace fitness_club
             clientsWindow.Owner = this;
             clientsWindow.ShowDialog();
         }
+        private void OpenSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            var scheduleWindow = new Schedule();
+            scheduleWindow.Owner = this;
+            scheduleWindow.ShowDialog();
+        }
     }
 }
 
