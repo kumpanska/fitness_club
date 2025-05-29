@@ -40,7 +40,7 @@ namespace fitness_club
             if (string.IsNullOrWhiteSpace(client.Name) || string.IsNullOrWhiteSpace(client.LastName) || string.IsNullOrWhiteSpace(client.MiddleName) ||
                string.IsNullOrWhiteSpace(client.PhoneNumber) || string.IsNullOrWhiteSpace(client.Email))
             {
-                MessageBox.Show("Усі поля обов'язкові до заповнення.");
+                MessageBox.Show("Заповніть всі поля.");
                 return;
             }
             try
@@ -61,7 +61,7 @@ namespace fitness_club
                         cmd.ExecuteNonQuery();
                     }
                 }
-                MessageBox.Show("Клієнт успішно зареєстрований у БД!", "Успіх");
+                MessageBox.Show("Клієнт успішно зареєстрований!", "Клієнта зареєстровано");
                 FirstNameText.Clear();
                 LastNameText.Clear();
                 MiddleNameText.Clear();
@@ -70,7 +70,7 @@ namespace fitness_club
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Помилка під час запису в БД: " + ex.Message, "Помилка");
+                MessageBox.Show("Помилка під час запису даних в базу даних: " + ex.Message, "Помилка");
             }
         }
     }

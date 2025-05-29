@@ -67,7 +67,7 @@ namespace fitness_club
             string repetitionsText = RepetitionsTextBox.Text.Trim();
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(type) || string.IsNullOrEmpty(repetitionsText))
             {
-                MessageBox.Show("Будь ласка, заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (!int.TryParse(repetitionsText, out int repetitions) || repetitions < 0)
@@ -88,7 +88,7 @@ namespace fitness_club
                     cmd.Parameters.AddWithValue("@Repetitions", repetitions);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("Вправу успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Вправу успішно додано!", "Додавання вправи", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
                 Close();
             }
