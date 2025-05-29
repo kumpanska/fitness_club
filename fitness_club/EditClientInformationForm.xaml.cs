@@ -41,9 +41,9 @@ namespace fitness_club
             string phone = ClientPhoneNumberText.Text.Trim();
             string email = ClientEmailText.Text.Trim();
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(lastName) ||
-       string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(email))
+                string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("Будь ласка, заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             try
@@ -51,10 +51,7 @@ namespace fitness_club
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = @"UPDATE [Table_Clients]
-                             SET [Name] = @Name,
-                                 [Last Name] = @LastName,
-                                 [Middle Name] = @MiddleName,
+                    string query = @"UPDATE [Table_Clients] SET [Name] = @Name, [Last Name] = @LastName, [Middle Name] = @MiddleName,
                                  [Phone Number] = @PhoneNumber,
                                  [Email] = @Email
                              WHERE [Id] = @Id";
@@ -67,13 +64,13 @@ namespace fitness_club
                     cmd.Parameters.AddWithValue("@Id", clientId);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("Інформацію про тренера оновлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Інформацію про тренера оновлено!", "Оновлення інформації", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Помилка збереженні: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Помилка при збереженні інформації: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void CancelButton_Click(object sender, RoutedEventArgs e)

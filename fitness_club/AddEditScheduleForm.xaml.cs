@@ -116,12 +116,12 @@ namespace fitness_club
             if (CoachComboBox.SelectedValue == null || FitnessServiceComboBox.SelectedValue == null || !DatePicker.SelectedDate.HasValue)
 
             {
-                MessageBox.Show("Будь ласка, заповніть всі поля.");
+                MessageBox.Show("Заповніть всі поля.");
                 return;
             }
             if (!TimeSpan.TryParse(TimeBox.Text, out TimeSpan parsedTime))
             {
-                MessageBox.Show("Введіть коректний формат часу(HH:MM)");
+                MessageBox.Show("Введіть коректний формат часу(HH:MM).");
                 return;
             }
             int coachId = (int)CoachComboBox.SelectedValue;

@@ -50,12 +50,12 @@ namespace fitness_club
             string repetitionsText = RepetitionsTextBox.Text.Trim();
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(type) || string.IsNullOrEmpty(repetitionsText))
             {
-                MessageBox.Show("Будь ласка, заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (!int.TryParse(repetitionsText, out int repetitions) || repetitions < 0)
             {
-                MessageBox.Show("Кількість повторень має бути додатним числом.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Кількість повторень вправи має бути додатним числом.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             try
@@ -71,7 +71,7 @@ namespace fitness_club
                     cmd.Parameters.AddWithValue("@Id", exerciseId);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("Вправу успішно оновлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Вправу успішно оновлено!", "Оновлення вправи", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
                 Close();
             }

@@ -88,6 +88,12 @@ namespace fitness_club
             scheduleWindow.Owner = this;
             scheduleWindow.ShowDialog();
         }
+        private void OpenRating_Click(object sender, RoutedEventArgs e)
+        {
+            var ratingWindow = new Rating();
+            ratingWindow.Owner = this;
+            ratingWindow.ShowDialog();
+        }
     }
 }
 

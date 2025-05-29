@@ -1,0 +1,29 @@
+﻿<Window x:Class="fitness_club.Rating"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:fitness_club"
+        mc:Ignorable="d"
+        Title="Рейтинг тренерів" Height="500" Width="800" HorizontalContentAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinHeight="400" MinWidth="700">
+    <Grid Background="LightSalmon" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+                    <TextBlock Text="Рейтинг тренерів" FontSize="18" FontWeight="DemiBold" Foreground="Black" Margin="0,0,0,10" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <ListView Name="RatingsListView" Margin="100,30,100,74" FontSize="14" Width="600" SelectionChanged="RatingsListView_SelectionChanged" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" Width="40" DisplayMemberBinding="{Binding Number}"/>
+                    <GridViewColumn Header="Тренер" Width="300" DisplayMemberBinding="{Binding CoachFullName}"/>
+                    <GridViewColumn Header="Оцінка тренера" Width="110" DisplayMemberBinding="{Binding AverageMark}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="DeleteButton" Grid.Row="2" Content="Видалити тренера з рейтингу" Background="White" FontSize="18" HorizontalAlignment="Right" Margin="0,10,20,10" Height="44" Width="261" Click="DeleteCoachButton_Click" IsEnabled="False">
+        </Button>
+
+    </Grid>
+</Window>

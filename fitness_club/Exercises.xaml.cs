@@ -83,7 +83,7 @@ namespace fitness_club
         {
             if (ExercisesListView.SelectedItem is ExerciseClass selected)
             {
-                var result = MessageBox.Show($"Ви впевнені, що хочете видалити вправу: {selected.NameOfExercise}?","Підтвердження",MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Видалити вправу: {selected.NameOfExercise}?","Підтвердження",MessageBoxButton.YesNo);
                 if(result==MessageBoxResult.Yes)
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))

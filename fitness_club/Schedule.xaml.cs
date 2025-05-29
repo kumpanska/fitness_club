@@ -46,13 +46,7 @@ namespace fitness_club
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = @"
-                 SELECT 
-                  s.Id,
-                  s.CoachId,
-                  s.Date,
-                  s.Time,
-                  c.[Last Name] AS CoachLastName,
+                string query = @"SELECT  s.Id, s.CoachId, s.Date, s.Time, c.[Last Name] AS CoachLastName,
                   c.[Name] AS CoachFirstName,
                   c.[Middle Name] AS CoachMiddleName,
                   c.[Fitness Services] AS FitnessServiceName
@@ -92,12 +86,11 @@ namespace fitness_club
                 LoadSchedule();
             }
         }
-
         private void DeleteSchedule_Click(object sender, RoutedEventArgs e)
         {
             if (ScheduleListView.SelectedItem is ScheduleClass selected)
             {
-                var result = MessageBox.Show($"Ви впевнені, що хочете видалити розклад тренера: {selected.CoachFullName}?", "Підтвердження", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Видалити розклад тренера: {selected.CoachFullName}?", "Підтвердження", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))

@@ -64,7 +64,7 @@ namespace fitness_club
         {
             if (ClientsListView.SelectedItem is ClientClass selected)
             {
-                var result = MessageBox.Show($"Ви впевнені, що хочете видалити клієнта: {selected.LastName} {selected.Name} {selected.MiddleName}?", "Підтвердження", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Видалити клієнта: {selected.LastName} {selected.Name} {selected.MiddleName}?", "Підтвердження", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))

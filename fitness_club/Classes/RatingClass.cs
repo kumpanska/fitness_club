@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace fitness_club.Classes
 {
-    internal class RatingClass
+    public class RatingClass:Person
     {
-        private int id;
+        private int ratingId;
         private int coachId;
         private double averageMark;
-        public int Id
+        private int number;
+        public int RatingId
         {
-            get { return id; }
-            set { id = value; }
+            get { return ratingId; }
+            set { ratingId = value; }
         }
         public int CoachId
         {
@@ -25,6 +26,15 @@ namespace fitness_club.Classes
         {
             get { return averageMark; }
             set { averageMark = value; }
+        }
+        public string CoachFullName
+        {
+            get { return $"{LastName} {Name} {MiddleName}"; }
+        }
+        public int Number
+        {
+            get { return number; }
+            set { number = value; }
         }
 
     }

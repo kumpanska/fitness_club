@@ -57,7 +57,7 @@ namespace fitness_club
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(lastName) ||
        string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(fitnessServices))
             {
-                MessageBox.Show("Будь ласка, заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             try
@@ -65,10 +65,7 @@ namespace fitness_club
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = @"UPDATE [Table_Coaches]
-                             SET [Name] = @Name,
-                                 [Last Name] = @LastName,
-                                 [Middle Name] = @MiddleName,
+                    string query = @"UPDATE [Table_Coaches] SET [Name] = @Name,[Last Name] = @LastName, [Middle Name] = @MiddleName,
                                  [Phone Number] = @PhoneNumber,
                                  [Email] = @Email,
                                  [Fitness Services] = @FitnessServices
@@ -83,13 +80,13 @@ namespace fitness_club
                     cmd.Parameters.AddWithValue("@Id", coachId);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("Інформацію про тренера оновлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Інформацію про тренера оновлено!", "Оновлення інформації", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Помилка збереженні: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Помилка при збереженні інформації: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

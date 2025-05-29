@@ -48,7 +48,7 @@ namespace fitness_club
                         MiddleName = reader["Middle Name"].ToString(),
                         PhoneNumber = reader["Phone Number"].ToString(),
                         Email = reader["Email"].ToString(),
-                        FitnessServices  = reader["Fitness Services"].ToString(),
+                        FitnessServices  = reader["Fitness Services"].ToString()
                     });
                 }
                 CoachesListView.ItemsSource = coaches;
@@ -69,13 +69,13 @@ namespace fitness_club
         {
             if (CoachesListView.SelectedItem is CoachClass selected)
             {
-                var result = MessageBox.Show($"Ви впевнені, що хочете видалити тренера: {selected.LastName} {selected.Name} {selected.MiddleName}?", "Підтвердження", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show($"Видалити тренера: {selected.LastName} {selected.Name} {selected.MiddleName}?", "Підтвердження", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-                        string query = "DELETE FROM [Table_Coaches] WHERE Id = @Id";
+                        string query = "DELETE FROM [Table_Coaches] WHERE Id=@Id";
                         SqlCommand cmd = new SqlCommand(query, connection);
                         cmd.Parameters.AddWithValue("@Id", selected.Id);
                         cmd.ExecuteNonQuery();
@@ -84,7 +84,7 @@ namespace fitness_club
                 }
             }
         }
-        private void CoachesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CoachesListView_SelectionChanged(object sender,SelectionChangedEventArgs e)
         {
             bool isItemSelected = CoachesListView.SelectedItem is CoachClass;
             EditButton.IsEnabled = isItemSelected;
