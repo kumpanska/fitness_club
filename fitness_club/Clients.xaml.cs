@@ -22,7 +22,7 @@ namespace fitness_club
     /// </summary>
     public partial class Clients : Window
     {
-        private ObservableCollection<ClientClass> clients = new ObservableCollection<ClientClass>();
+        private ObservableCollection<Classes.ClientClass> clients = new ObservableCollection<Classes.ClientClass>();
         private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
         public Clients()
         {

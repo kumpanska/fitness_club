@@ -22,7 +22,7 @@ namespace fitness_club
     /// </summary>
     public partial class Schedule : Window
     {
-        private ObservableCollection<ScheduleClass> schedules = new ObservableCollection<ScheduleClass>();
+        private ObservableCollection<Classes.ScheduleClass> schedules = new ObservableCollection<Classes.ScheduleClass>();
         private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
         public Schedule()
         {

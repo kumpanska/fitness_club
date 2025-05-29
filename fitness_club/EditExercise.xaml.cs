@@ -41,7 +41,7 @@ namespace fitness_club
         }
         private void LoadExerciseTypes()
         {
-            LoadExerciseTypesClass.LoadExerciseTypesIntoComboBox(ExerciseTypeComboBox);
+            Classes.LoadExerciseTypesClass.LoadExerciseTypesIntoComboBox(ExerciseTypeComboBox);
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
