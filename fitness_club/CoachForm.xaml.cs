@@ -24,7 +24,7 @@ namespace fitness_club
     {
         private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
         private Dictionary<int,ObservableCollection<ExerciseClass>> clientPlans=new();
-        private ObservableCollection<ExerciseClass> currentclientPlan;
+        private ObservableCollection<ExerciseClass> currentclientPlan=new ObservableCollection<ExerciseClass>();
         private ObservableCollection<ExerciseClass> allExercises = new ObservableCollection<ExerciseClass>();
         private string coachFitnessServices = "";
         public CoachForm()
@@ -266,10 +266,10 @@ namespace fitness_club
                         {
                             while (reader.Read())
                             {
-                                exercisesInDb.Add((reader["Exercise Name"].ToString(), reader["Type"].ToString(), Convert.ToInt32(reader["Number Of Repetitions"])));
+                                exercisesInDb.Add((reader["Exercise Name"].ToString()?? string.Empty, reader["Type"].ToString() ?? string.Empty, Convert.ToInt32(reader["Number Of Repetitions"])));
                             }
                         }
-                        var exercisesInMemory = pair.Value.Select(ex => (ex.NameOfExercise,ex.Type,ex.Repetitions)).ToList();
+                        var exercisesInMemory = pair.Value.Select(ex => (ex.NameOfExercise ?? string.Empty,ex.Type?? string.Empty,ex.Repetitions)).ToList();
 
                         bool plansAreEqual = exercisesInDb.Count == exercisesInMemory.Count &&
                                              !exercisesInDb.Except(exercisesInMemory).Any() &&
@@ -295,7 +295,6 @@ namespace fitness_club
                             anyChangesSaved = true;
                         }
                     }
-
                     if (anyChangesSaved)
                     {
                         MessageBox.Show("Комплекс вправ клієнта збережено.", "Збереження плану", MessageBoxButton.OK, MessageBoxImage.Information);
