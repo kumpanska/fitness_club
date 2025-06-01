@@ -23,7 +23,7 @@ namespace fitness_club
     public partial class CoachForm : Window
     {
         private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
-        private Dictionary<int, ObservableCollection<ExerciseClass>> clientPlans = new();
+        private Dictionary<int,ObservableCollection<ExerciseClass>> clientPlans=new();
         private ObservableCollection<ExerciseClass> currentclientPlan;
         private ObservableCollection<ExerciseClass> allExercises = new ObservableCollection<ExerciseClass>();
         private string coachFitnessServices = "";
@@ -62,7 +62,7 @@ namespace fitness_club
         {
             if (!clientPlans.ContainsKey(clientId))
             {
-                ObservableCollection<ExerciseClass> newPlan = new ObservableCollection<ExerciseClass>();
+                ObservableCollection<ExerciseClass> newPlan=new ObservableCollection<ExerciseClass>();
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -94,7 +94,7 @@ namespace fitness_club
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand cmd = new SqlCommand(@"SELECT c.Id,c.[Last Name],c.Name,c.[Middle Name] FROM Table_Clients c JOIN Table_ClientCoach cc ON cc.ClientId=c.Id WHERE cc.CoachId=@CoachId", connection);
+                SqlCommand cmd = new SqlCommand(@"SELECT c.Id,c.[Last Name],c.Name,c.[Middle Name] FROM Table_Clients c JOIN Table_ClientCoach cc ON cc.ClientId=c.Id WHERE cc.CoachId=@CoachId",connection);
                 cmd.Parameters.AddWithValue("@CoachId", coachId);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -106,14 +106,14 @@ namespace fitness_club
                         Name = reader["Name"].ToString(),
                         MiddleName = reader["Middle Name"].ToString()
                     });
-
+                
                 }
             }
             ClientComboBox.ItemsSource = clients;
             ClientComboBox.DisplayMemberPath = "FullName";
             ClientComboBox.SelectedValuePath = "Id";
         }
-        private void LoadAllExercises()
+        private void LoadAllExercises() 
         {
             allExercises.Clear();
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -181,35 +181,20 @@ namespace fitness_club
         private void AddExercise_Click(object sender, RoutedEventArgs e)
         {
             if (AllExercisesListBox.SelectedItem is ExerciseClass selectedExercise && ClientComboBox.SelectedItem is ClientClass selectedClient)
-            {
+            { 
                 if (!clientPlans.ContainsKey(selectedClient.Id))
                 {
                     clientPlans[selectedClient.Id] = new ObservableCollection<ExerciseClass>();
                 }
-                var existingExerciseInMemory = clientPlans[selectedClient.Id].FirstOrDefault(ex => ex.Id == selectedExercise.Id);
-                if (existingExerciseInMemory != null)
+                var existingExercise = clientPlans[selectedClient.Id].FirstOrDefault(ex => ex.Id == selectedExercise.Id);
+
+                if (existingExercise != null)
                 {
                     MessageBox.Show($"Вправа '{selectedExercise.NameOfExercise}' вже існує в комплексі цього клієнта. Видаліть дублікат вправи за допомогою кнопки 'Видалити вправу'",
-                                    "Дублікат вправи",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+                                  "Дублікат вправи",
+                                  MessageBoxButton.OK,
+                                  MessageBoxImage.Warning);
                     return;
-                }
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlCommand checkCmd = new SqlCommand(@"SELECT COUNT(*) FROM Table_ClientsExercises WHERE ClientId = @ClientId AND [Exercise Name] = @ExerciseName", connection);
-                    checkCmd.Parameters.AddWithValue("@ClientId", selectedClient.Id);
-                    checkCmd.Parameters.AddWithValue("@ExerciseName", selectedExercise.NameOfExercise);
-                    int count = (int)checkCmd.ExecuteScalar();
-                    if (count > 0)
-                    {
-                        MessageBox.Show($"Вправа '{selectedExercise.NameOfExercise}' вже є у плані цього клієнта у базі даних.",
-                                        "Дублікат вправи",
-                                        MessageBoxButton.OK,
-                                        MessageBoxImage.Warning);
-                        return;
-                    }
                 }
                 ExerciseClass exerciseCopy = new ExerciseClass
                 {
@@ -271,24 +256,20 @@ namespace fitness_club
                 {
                     connection.Open();
                     bool anyChangesSaved = false;
-
                     foreach (var pair in clientPlans)
                     {
                         int clientId = pair.Key;
-
-                        // Отримуємо з бази список вправ для цього клієнта
-                        List<string> exercisesInDb = new List<string>();
-                        SqlCommand selectCmd = new SqlCommand("SELECT [Exercise Name] FROM Table_ClientsExercises WHERE ClientId = @ClientId", connection);
+                        List<(string NameOfExercise,string Type, int Repetitions)> exercisesInDb = new List<(string,string,int)>();
+                        SqlCommand selectCmd = new SqlCommand("SELECT [Exercise Name],[Type],[Number Of Repetitions] FROM Table_ClientsExercises WHERE ClientId = @ClientId", connection);
                         selectCmd.Parameters.AddWithValue("@ClientId", clientId);
-                        SqlDataReader reader = selectCmd.ExecuteReader();
-                        while (reader.Read())
+                        using (SqlDataReader reader = selectCmd.ExecuteReader())
                         {
-                            exercisesInDb.Add(reader["Exercise Name"].ToString());
+                            while (reader.Read())
+                            {
+                                exercisesInDb.Add((reader["Exercise Name"].ToString(), reader["Type"].ToString(), Convert.ToInt32(reader["Number Of Repetitions"])));
+                            }
                         }
-                        reader.Close();
-
-                        // Перевіряємо, чи збігається список з тим, що в пам'яті
-                        var exercisesInMemory = pair.Value.Select(ex => ex.NameOfExercise).ToList();
+                        var exercisesInMemory = pair.Value.Select(ex => (ex.NameOfExercise,ex.Type,ex.Repetitions)).ToList();
 
                         bool plansAreEqual = exercisesInDb.Count == exercisesInMemory.Count &&
                                              !exercisesInDb.Except(exercisesInMemory).Any() &&
@@ -296,7 +277,6 @@ namespace fitness_club
 
                         if (!plansAreEqual)
                         {
-                            // Якщо план відрізняється — видаляємо і додаємо знову
                             SqlCommand deleteCmd = new SqlCommand("DELETE FROM Table_ClientsExercises WHERE ClientId = @ClientId", connection);
                             deleteCmd.Parameters.AddWithValue("@ClientId", clientId);
                             deleteCmd.ExecuteNonQuery();
@@ -312,7 +292,7 @@ namespace fitness_club
                                 insertCmd.Parameters.AddWithValue("@Repetitions", exercise.Repetitions);
                                 insertCmd.ExecuteNonQuery();
                             }
-                            anyChangesSaved = true; // Позначаємо, що щось збереглось
+                            anyChangesSaved = true;
                         }
                     }
 
@@ -334,8 +314,6 @@ namespace fitness_club
                 }
             }
         }
-
-
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
