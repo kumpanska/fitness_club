@@ -27,10 +27,14 @@ namespace fitness_club.Classes
                     {
                         while (reader.Read())
                         {
-                            string? type = reader["Type"]?.ToString();
-                            if (!string.IsNullOrWhiteSpace(type))
+                            int typeIndex = reader.GetOrdinal("Type");
+                            if (!reader.IsDBNull(typeIndex))
                             {
-                                comboBox.Items.Add(new ComboBoxItem { Content = type });
+                                string type = reader.GetString(typeIndex);
+                                if (!string.IsNullOrWhiteSpace(type))
+                                {
+                                    comboBox.Items.Add(new ComboBoxItem { Content = type });
+                                }
                             }
                         }
                     }

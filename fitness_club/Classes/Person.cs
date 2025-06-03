@@ -9,40 +9,41 @@ namespace fitness_club.Classes
     public class Person
     {
         private int id;
-        private string? name;
-        private string? lastName;
-        private string? middleName;
-        private string? phoneNumber;
-        private string? email;
+        private string name = string.Empty;
+        private string lastName = string.Empty;
+        private string middleName = string.Empty;
+        private string phoneNumber = string.Empty;
+        private string email = string.Empty;
         public int Id
         {
             get { return id; }
             set {  id = value; }
         }
-        public string? Name
+        public string Name
         {
             get { return name; }
             set { name = value; }
         }
-        public string? LastName
+        public string   LastName
         {
             get { return lastName; }
             set { lastName = value; }
         }
-        public string? MiddleName
+        public string MiddleName
         {
             get { return middleName; }
             set { middleName = value; }
         }
-        public string? PhoneNumber
+        public string PhoneNumber
         {
             get { return phoneNumber; }
             set { phoneNumber = value; }
         }
-        public string? Email
+        public string Email
         {
             get { return email; }
             set { email = value; }
         }
+        public string FullName => $"{LastName} {Name} {MiddleName}";
     }
 }

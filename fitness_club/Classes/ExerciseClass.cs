@@ -32,6 +32,10 @@ namespace fitness_club.Classes
             get { return repetitions; }
             set { repetitions = value; }
         }
+        public override string ToString()
+        {
+            return $"{NameOfExercise} - {Repetitions} повторень";
+        }
     }
 }
 
