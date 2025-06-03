@@ -8,8 +8,8 @@ namespace fitness_club.Classes
 {
     public class CoachClass : Person
     {
-        private string? fitnessServices;
-        public string? FitnessServices
+        private string fitnessServices = string.Empty;
+        public string FitnessServices
         {
             get { return fitnessServices; }
             set { fitnessServices = value; }

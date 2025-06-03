@@ -64,7 +64,7 @@ namespace fitness_club
                         Date = Convert.ToDateTime(reader["Date"]),
                         Time = (TimeSpan)reader["Time"],
                         CoachFullName = coachFullName,
-                        FitnessServiceName = reader["FitnessServiceName"]?.ToString()
+                        FitnessServiceName = reader["FitnessServiceName"]?.ToString() ?? string.Empty,
                     });
                 }
             }

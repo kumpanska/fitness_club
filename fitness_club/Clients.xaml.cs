@@ -43,11 +43,11 @@ namespace fitness_club
                     clients.Add(new ClientClass
                     {
                         Id = (int)reader["Id"],
-                        LastName = reader["Last Name"].ToString(),
-                        Name = reader["Name"].ToString(),
-                        MiddleName = reader["Middle Name"].ToString(),
-                        PhoneNumber = reader["Phone Number"].ToString(),
-                        Email = reader["Email"].ToString()
+                        LastName = reader["Last Name"] as string ?? ""  ,
+                        Name = reader["Name"] as string ?? "",
+                        MiddleName = reader["Middle Name"] as string ?? "",
+                        PhoneNumber = reader["Phone Number"] as string ?? "",
+                        Email = reader["Email"] as string ?? ""
                     });
                 }
                 ClientsListView.ItemsSource = clients;

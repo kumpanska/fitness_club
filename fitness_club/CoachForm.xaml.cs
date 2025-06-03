@@ -45,11 +45,11 @@ namespace fitness_club
                 {
                     coaches.Add(new Classes.CoachClass
                     {
-                        Id = (int)reader["Id"],
-                        LastName = reader["Last Name"].ToString(),
-                        Name = reader["Name"].ToString(),
-                        MiddleName = reader["Middle Name"].ToString(),
-                        FitnessServices = reader["Fitness Services"].ToString()
+                        Id = reader["Id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Id"]),
+                        LastName = reader["Last Name"] as string ?? "",
+                        Name = reader["Name"] as string ?? "",
+                        MiddleName = reader["Middle Name"] as string ?? "",
+                        FitnessServices = reader["Fitness Services"] as string ?? ""
                     });
 
                 }
@@ -75,8 +75,8 @@ namespace fitness_club
                         newPlan.Add(new Classes.ExerciseClass
                         {
                             Id = (int)reader["Id"],
-                            NameOfExercise = reader["Exercise Name"].ToString(),
-                            Type = reader["Type"].ToString(),
+                            NameOfExercise = reader["Exercise Name"]as string ?? "",
+                            Type = reader["Type"].ToString() as string ?? "",
                             Repetitions = (int)(reader["Number Of Repetitions"] == DBNull.Value ? 0 : reader["Number Of Repetitions"])
                         });
 
@@ -102,9 +102,9 @@ namespace fitness_club
                     clients.Add(new Classes.ClientClass
                     {
                         Id = (int)reader["Id"],
-                        LastName = reader["Last Name"].ToString(),
-                        Name = reader["Name"].ToString(),
-                        MiddleName = reader["Middle Name"].ToString()
+                        LastName = reader["Last Name"]as string ?? "",
+                        Name = reader["Name"] as string ?? "",
+                        MiddleName = reader["Middle Name"] as string ?? ""
                     });
                 
                 }
@@ -126,8 +126,8 @@ namespace fitness_club
                     allExercises.Add(new Classes.ExerciseClass
                     {
                         Id = (int)reader["Id"],
-                        NameOfExercise = reader["Exercise Name"].ToString(),
-                        Type = reader["Type"].ToString(),
+                        NameOfExercise = reader["Exercise Name"] as string ?? "",
+                        Type = reader["Type"] as string ?? "",
                         Repetitions = (int)(reader["Number Of Repetitions"] == DBNull.Value ? 0 : reader["Number Of Repetitions"])
                     });
 
@@ -169,8 +169,8 @@ namespace fitness_club
                     allExercises.Add(new ExerciseClass
                     {
                         Id = (int)reader["Id"],
-                        NameOfExercise = reader["Exercise Name"].ToString(),
-                        Type = reader["Type"].ToString(),
+                        NameOfExercise = reader["Exercise Name"] as string ?? "",
+                        Type = reader["Type"] as string ?? "",
                         Repetitions = (int)(reader["Number Of Repetitions"] == DBNull.Value ? 0 : reader["Number Of Repetitions"])
                     });
                 }

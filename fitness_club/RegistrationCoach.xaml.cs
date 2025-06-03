@@ -66,7 +66,7 @@ namespace fitness_club
                 LastName = CoachLastNameText.Text.Trim(),
                 PhoneNumber = CoachPhoneNumberText.Text.Trim(),
                 Email = CoachEmailText.Text.Trim(),
-                FitnessServices = ExerciseTypeCbo.SelectedItem as string
+                FitnessServices = ExerciseTypeCbo.SelectedItem as string ?? string.Empty
             };
 
             if (string.IsNullOrWhiteSpace(coach.Name) || string.IsNullOrWhiteSpace(coach.LastName) || string.IsNullOrWhiteSpace(coach.MiddleName) ||

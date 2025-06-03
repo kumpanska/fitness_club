@@ -13,8 +13,8 @@ namespace fitness_club.Classes
         private DateTime date;
         private TimeSpan time;
         private int fitnessServicesId;
-        private string? coachFullName;
-        private string? fitnessServiceName;
+        private string coachFullName = string.Empty;
+        private string fitnessServiceName = string.Empty;
         public int Id
         {
             get { return id; }
@@ -55,7 +55,7 @@ namespace fitness_club.Classes
                 fitnessServicesId = value;
             }
         }
-        public string? CoachFullName
+        public string CoachFullName
         {
             get { return coachFullName; }
             set
@@ -63,7 +63,7 @@ namespace fitness_club.Classes
                 coachFullName = value;
             }
         }
-        public string? FitnessServiceName
+        public string FitnessServiceName
         {
             get { return fitnessServiceName; }
             set

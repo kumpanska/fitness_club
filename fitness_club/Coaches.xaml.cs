@@ -43,12 +43,12 @@ namespace fitness_club
                     coaches.Add(new CoachClass
                     {
                         Id = (int)reader["Id"],
-                        LastName = reader["Last Name"].ToString(),
-                        Name = reader["Name"].ToString(),
-                        MiddleName = reader["Middle Name"].ToString(),
-                        PhoneNumber = reader["Phone Number"].ToString(),
-                        Email = reader["Email"].ToString(),
-                        FitnessServices  = reader["Fitness Services"].ToString()
+                        LastName = reader["Last Name"] as string ?? "",
+                        Name = reader["Name"] as string ?? "",
+                        MiddleName = reader["Middle Name"] as string ?? "",
+                        PhoneNumber = reader["Phone Number"] as string ?? "",
+                        Email = reader["Email"] as string ?? "",
+                        FitnessServices  = reader["Fitness Services"] as string ?? ""
                     });
                 }
                 CoachesListView.ItemsSource = coaches;

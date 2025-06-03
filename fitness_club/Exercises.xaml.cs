@@ -43,8 +43,8 @@ namespace fitness_club
                     exercises.Add(new ExerciseClass
                     {
                         Id = (int)reader["Id"],
-                        NameOfExercise = reader["Exercise Name"].ToString(),
-                        Type = reader["Type"].ToString(),
+                        NameOfExercise = reader["Exercise Name"] as string ?? "",
+                        Type = reader["Type"] as string ?? "",
                         Repetitions = reader["Number Of Repetitions"] != DBNull.Value ? (int)reader["Number Of Repetitions"] : 0
                     });
                 }

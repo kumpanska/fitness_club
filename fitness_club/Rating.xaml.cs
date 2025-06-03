@@ -45,9 +45,9 @@ namespace fitness_club
                         RatingId = (int)reader["RatingId"],
                         CoachId = (int)reader["CoachId"],
                         AverageMark = Convert.ToSingle(reader["Mark"]),
-                        LastName = reader["Last Name"].ToString(),
-                        Name = reader["Name"].ToString(),
-                        MiddleName = reader["Middle Name"].ToString()
+                        LastName = reader["Last Name"] as string ?? "",
+                        Name = reader["Name"] as string ?? "",
+                        MiddleName = reader["Middle Name"] as string ?? ""
                     });
                 }
                 List<Classes.RatingClass> sortedValues = list.OrderByDescending(value => value.AverageMark).ToList();
