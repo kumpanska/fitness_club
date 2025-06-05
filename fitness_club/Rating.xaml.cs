@@ -34,7 +34,9 @@ namespace fitness_club
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT r.Id AS RatingId,r.CoachId,r.Mark, c.[Last Name], c.[Name],c.[Middle Name] FROM [Table_Ratings] r JOIN [Table_Coaches] c ON r.CoachId=c.Id";
+                string query = "SELECT c.Id AS CoachId, AVG(CAST(r.Mark As DECIMAL(5,2)))" +
+                    " AS Mark,COUNT(r.Mark) AS RatingCount,c.[Last Name],c.[Name],c.[Middle Name]" +
+                    " FROM [Table_Ratings] r JOIN [Table_Coaches] c ON r.CoachId=c.Id GROUP BY c.Id, c.[Last Name], c.[Name],c.[Middle Name]";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 SqlDataReader reader = cmd.ExecuteReader();
                 List<Classes.RatingClass> list = new List<Classes.RatingClass>();
@@ -42,7 +44,7 @@ namespace fitness_club
                 {
                     list.Add(new Classes.RatingClass
                     {
-                        RatingId = (int)reader["RatingId"],
+                        RatingId = 0,
                         CoachId = (int)reader["CoachId"],
                         AverageMark = Convert.ToSingle(reader["Mark"]),
                         LastName = reader["Last Name"] as string ?? "",
@@ -69,9 +71,9 @@ namespace fitness_club
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-                        string query = "DELETE FROM [Table_Ratings] WHERE Id=@Id";
+                        string query = "DELETE FROM [Table_Ratings] WHERE CoachId=@CoachId";
                         SqlCommand cmd = new SqlCommand(query, connection);
-                        cmd.Parameters.AddWithValue("@Id", selected.RatingId);
+                        cmd.Parameters.AddWithValue("@CoachId", selected.CoachId);
                         cmd.ExecuteNonQuery();
                     }
                     LoadRating();

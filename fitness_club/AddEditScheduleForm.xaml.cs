@@ -22,7 +22,7 @@ namespace fitness_club
     /// </summary>
     public partial class AddEditScheduleForm : Window
     {
-        private ScheduleClass? schedule;
+        private ScheduleClass schedule = new ScheduleClass();
         private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
         public AddEditScheduleForm()
         {

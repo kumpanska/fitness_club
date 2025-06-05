@@ -16,29 +16,37 @@
             <TextBlock Text="Клієнт:" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <ComboBox Name="ClientComboBox"
                       Width="247" Height="30" FontSize="16"
-                      DisplayMemberPath="Name" SelectedValuePath="Id"
+                      DisplayMemberPath="FullName" SelectedValuePath="Id" SelectionChanged="ClientComboBox_SelectionChanged"
                       />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="354,60,30,0" VerticalAlignment="Top" Grid.RowSpan="2">
             <TextBlock Text="Ваш тренер:" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <ComboBox Name="CoachComboBox"
                       Width="250" Height="30" FontSize="16"
-                      DisplayMemberPath="Name" SelectedValuePath="Id"
+                      DisplayMemberPath="FullName" SelectedValuePath="Id" SelectionChanged="CoachComboBox_SelectionChanged"
                      />
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="20">
-            <TextBlock Text="Ваш комплекс вправ:" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
-            <ListBox Name="ExerciseListBox" FontSize="14" Background="White" Height="292"/>
+            <TextBlock Text="Комплекс вправ:" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
+            <ListView Name="ExerciseListView" FontSize="14" Background="White" Height="292"  Width="588">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Назва вправи" Width="200" DisplayMemberBinding="{Binding NameOfExercise}"/>
+                        <GridViewColumn Header="Тип вправи" Width="150" DisplayMemberBinding="{Binding Type}"/>
+                        <GridViewColumn Header="Кількість повторень" Width="150" DisplayMemberBinding="{Binding Repetitions}"/>
+                    </GridView>
+                    </ListView.View>
+            </ListView>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="20,391,-20,20" Grid.Row="1">
             <TextBlock Text="Оцінити тренера (0-5 балів):" FontSize="16" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <TextBox Name="RatingTextBox" Width="60" Height="30" FontSize="16"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,20,10">
-            <Button Content="Зберегти і закрити" Width="170" Height="40"
-                    Background="White" FontWeight="DemiBold" Margin="5,0"/>
-            <Button Content="Відмінити і закрити" Width="170" Height="40"
-                    Background="White" FontWeight="DemiBold" Margin="5,0"/>
+            <Button Content="Зберегти" Width="170" Height="40"
+                    Background="White" FontSize="14" FontWeight="DemiBold" Margin="5,0" Click="SaveButton_Click"/>
+            <Button Content="Відмінити" Width="170" Height="40"
+                    Background="White"  FontSize="14" FontWeight="DemiBold" Margin="5,0" Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>
