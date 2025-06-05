@@ -9,20 +9,20 @@ namespace fitness_club.Classes
     public class ExerciseClass
     {
         private int id;
-        private string? name;
-        private string? type;
+        private string name = string.Empty;
+        private string type = string.Empty;
         private int repetitions;
         public int Id
         {
             get { return id; }
             set { id = value; }
         }
-        public string? NameOfExercise
+        public string NameOfExercise
         {
             get { return name; }
             set { name = value; }
         }
-        public string? Type
+        public string Type
         {
             get { return type; }
             set { type = value; }
