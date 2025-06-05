@@ -44,6 +44,9 @@ namespace fitness_club.Classes
             get { return email; }
             set { email = value; }
         }
-        public string FullName => $"{LastName} {Name} {MiddleName}";
+        public virtual string FullName()
+        { 
+          return $"{LastName} {Name} {MiddleName}";
+        }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="Список клієнтів" Height="450" Width="1100" MinHeight="400" MinWidth="1000">
+        Title="Список клієнтів" Height="450" Width="800" MinHeight="400" MinWidth="700">
     <Grid Background="Brown" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,14 +17,12 @@
                FontSize="16" FontWeight="DemiBold" Foreground="White"
                Margin="10" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
-        <ListView Name="ClientsListView" Background="SeaShell" FontSize="14" Margin="0,41,0,0" HorizontalAlignment="Center" SelectionChanged="CoachesListView_SelectionChanged" Width="956" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
+        <ListView Name="ClientsListView" Background="SeaShell" FontSize="14" Margin="0,41,0,0" HorizontalAlignment="Center" SelectionChanged="CoachesListView_SelectionChanged" Width="736" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Прізвище" Width="200" DisplayMemberBinding="{Binding LastName}"/>
-                    <GridViewColumn Header="Ім'я" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="По батькові" Width="150" DisplayMemberBinding="{Binding MiddleName}"/>
-                    <GridViewColumn Header="Номер телефону" Width="150" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                    <GridViewColumn Header="Пошта" Width="150" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn Header="ПІБ клієнта" Width="300" DisplayMemberBinding="{Binding FullNameText}"/>
+                    <GridViewColumn Header="Номер телефону" Width="200" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    <GridViewColumn Header="Пошта" Width="300" DisplayMemberBinding="{Binding Email}"/>
                 </GridView>
             </ListView.View>
         </ListView>

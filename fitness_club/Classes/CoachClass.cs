@@ -14,6 +14,11 @@ namespace fitness_club.Classes
             get { return fitnessServices; }
             set { fitnessServices = value; }
         }
+        public override string FullName()
+        {
+            return $"Тренер: {base.FullName()}";
+        }
+        public string FullNameText => FullName();
 
     }
 }

@@ -8,5 +8,10 @@ namespace fitness_club.Classes
 {
     public class ClientClass:Person
     {
+        public override string FullName()
+        {
+            return $"Клієнт: {base.FullName()}";
+        }
+        public string FullNameText => FullName();
     }
 }

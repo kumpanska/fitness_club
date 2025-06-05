@@ -69,7 +69,7 @@ namespace fitness_club
         {
             if (CoachesListView.SelectedItem is CoachClass selected)
             {
-                MessageBoxResult result = MessageBox.Show($"Видалити тренера: {selected.LastName} {selected.Name} {selected.MiddleName}?", "Підтвердження", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show($"Видалити тренера: {selected.FullName()}?", "Підтвердження", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))

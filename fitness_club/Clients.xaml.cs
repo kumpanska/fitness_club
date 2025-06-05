@@ -51,6 +51,7 @@ namespace fitness_club
                     });
                 }
                 ClientsListView.ItemsSource = clients;
+                
             }
         }
         private void CoachesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,7 +65,7 @@ namespace fitness_club
         {
             if (ClientsListView.SelectedItem is ClientClass selected)
             {
-                var result = MessageBox.Show($"Видалити клієнта: {selected.LastName} {selected.Name} {selected.MiddleName}?", "Підтвердження", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Видалити клієнта: {selected.FullName()}?", "Підтвердження", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))
