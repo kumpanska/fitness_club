@@ -2,11 +2,11 @@
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -68,6 +68,15 @@ namespace fitness_club
                 Email = CoachEmailText.Text.Trim(),
                 FitnessServices = ExerciseTypeCbo.SelectedItem as string ?? string.Empty
             };
+            if (!ValidateCoachAttributes(coach, out string errorMessage))
+            {
+                txtError.Text = errorMessage;
+                return;
+            }
+            else
+            {
+                txtError.Text = string.Empty;
+            }
 
             if (string.IsNullOrWhiteSpace(coach.Name) || string.IsNullOrWhiteSpace(coach.LastName) || string.IsNullOrWhiteSpace(coach.MiddleName) ||
                 string.IsNullOrWhiteSpace(coach.PhoneNumber) || string.IsNullOrWhiteSpace(coach.Email) ||
@@ -108,5 +117,21 @@ namespace fitness_club
                 MessageBox.Show("Помилка під час запису даних в базу даних: " + ex.Message, "Помилка");
             }
         }
+        private bool ValidateCoachAttributes(CoachClass coach, out string errorMessage)
+        {
+            var context = new ValidationContext(coach);
+            var results = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(coach, context, results, validateAllProperties: true);
+            if (!isValid)
+            {
+                errorMessage = string.Join(Environment.NewLine, results.Select(r => r.ErrorMessage));
+            }
+            else
+            {
+                errorMessage = string.Empty;
+            }
+            return isValid;
+        }
+
     }
 }
