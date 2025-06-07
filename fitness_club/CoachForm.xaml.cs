@@ -26,6 +26,8 @@ namespace fitness_club
         private Dictionary<int,ObservableCollection<ExerciseClass>> clientPlans=new();
         private ObservableCollection<ExerciseClass> currentclientPlan=new ObservableCollection<ExerciseClass>();
         private ObservableCollection<ExerciseClass> allExercises = new ObservableCollection<ExerciseClass>();
+        private ObservableCollection<CoachClass> allCoaches = new ObservableCollection<CoachClass>();
+        private ObservableCollection<CoachClass> filteredCoachesBySearch = new ObservableCollection<CoachClass>();
         private string coachFitnessServices = "";
         public CoachForm()
         {
@@ -35,7 +37,7 @@ namespace fitness_club
         }
         private void LoadCoaches()
         {
-            List<Classes.CoachClass> coaches = new List<Classes.CoachClass>();
+            allCoaches.Clear();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -43,20 +45,61 @@ namespace fitness_club
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    coaches.Add(new Classes.CoachClass
+                    allCoaches.Add(new Classes.CoachClass
                     {
                         Id = reader["Id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Id"]),
-                        LastName = reader["Last Name"] as string ?? "",
-                        Name = reader["Name"] as string ?? "",
-                        MiddleName = reader["Middle Name"] as string ?? "",
-                        FitnessServices = reader["Fitness Services"] as string ?? ""
+                        LastName = reader["Last Name"]?.ToString() ?? "",
+                        Name = reader["Name"]?.ToString() ?? "",
+                        MiddleName = reader["Middle Name"]?.ToString() ?? "",
+                        FitnessServices = reader["Fitness Services"]?.ToString() ?? ""
                     });
 
                 }
             }
-            CoachComboBox.ItemsSource = coaches;
-            CoachComboBox.DisplayMemberPath = "FullName";
+            filteredCoachesBySearch.Clear();
+            foreach (var coach in allCoaches)
+            {
+                filteredCoachesBySearch.Add(coach);
+            }
+            CoachComboBox.ItemsSource = filteredCoachesBySearch;
+            CoachComboBox.DisplayMemberPath = "FullNameText";
             CoachComboBox.SelectedValuePath = "Id";
+        }
+        private void CoachSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string search = CoachSearch.Text.ToLower().Trim();
+            filteredCoachesBySearch.Clear();
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                foreach (CoachClass coach in allCoaches)
+                {
+                    filteredCoachesBySearch.Add(coach);
+                }
+            }
+            else 
+            {
+                foreach (CoachClass coach in allCoaches)
+                {
+                    if (coach.LastName.ToLower().Contains(search))
+                    {
+                        filteredCoachesBySearch.Add(coach);
+                    }
+                }
+            }
+            CoachComboBox.ItemsSource = null;
+            CoachComboBox.ItemsSource = filteredCoachesBySearch;
+            if (filteredCoachesBySearch.Count == 1)
+            {
+                CoachComboBox.SelectedItem = filteredCoachesBySearch[0];
+            }
+            else
+            {
+                CoachComboBox.SelectedItem = null;
+                FitnessServicesTextBox.Text = "";
+                ClientComboBox.ItemsSource= null;
+                ClientPlanList.ItemsSource = null;
+                LoadAllExercises();
+            }
         }
         private void LoadClientExercisePlan(int clientId)
         {
@@ -110,7 +153,7 @@ namespace fitness_club
                 }
             }
             ClientComboBox.ItemsSource = clients;
-            ClientComboBox.DisplayMemberPath = "FullName";
+            ClientComboBox.DisplayMemberPath = "FullNameText";
             ClientComboBox.SelectedValuePath = "Id";
         }
         private void LoadAllExercises() 
@@ -190,7 +233,7 @@ namespace fitness_club
 
                 if (existingExercise != null)
                 {
-                    MessageBox.Show($"Вправа '{selectedExercise.NameOfExercise}' вже існує в комплексі цього клієнта. Видаліть дублікат вправи за допомогою кнопки 'Видалити вправу'",
+                    MessageBox.Show($"Вправа '{selectedExercise.NameOfExercise}' вже існує в комплексі цього клієнта.",
                                   "Дублікат вправи",
                                   MessageBoxButton.OK,
                                   MessageBoxImage.Warning);

@@ -1,5 +1,6 @@
 ﻿using fitness_club.Classes;
 using Microsoft.Data.SqlClient;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -68,16 +69,7 @@ namespace fitness_club
                 Email = CoachEmailText.Text.Trim(),
                 FitnessServices = ExerciseTypeCbo.SelectedItem as string ?? string.Empty
             };
-            if (!ValidateCoachAttributes(coach, out string errorMessage))
-            {
-                txtError.Text = errorMessage;
-                return;
-            }
-            else
-            {
-                txtError.Text = string.Empty;
-            }
-
+         
             if (string.IsNullOrWhiteSpace(coach.Name) || string.IsNullOrWhiteSpace(coach.LastName) || string.IsNullOrWhiteSpace(coach.MiddleName) ||
                 string.IsNullOrWhiteSpace(coach.PhoneNumber) || string.IsNullOrWhiteSpace(coach.Email) ||
                 string.IsNullOrWhiteSpace(coach.FitnessServices))
@@ -85,6 +77,12 @@ namespace fitness_club
                 MessageBox.Show("Заповніть всі поля.");
                 return;
             }
+            if (!ValidateCoachAttributes(coach, out string errorMessage))
+            {
+                txtError.Text = errorMessage;
+                return;
+            }
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -111,6 +109,7 @@ namespace fitness_club
                 CoachPhoneNumberText.Clear();
                 CoachEmailText.Clear();
                 ExerciseTypeCbo.SelectedIndex = -1;
+                txtError.Text = string.Empty;
             }
             catch (Exception ex)
             {

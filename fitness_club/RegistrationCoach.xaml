@@ -5,70 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fitness_club"
         mc:Ignorable="d"
-        Title="Реєстрація тренера" Height="500" Width="800" MinHeight="450" MinWidth="700">
+        Title="Реєстрація тренера" Height="550" Width="800" MinHeight="500" MinWidth="750">
     <Grid Background="LightSalmon">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Ім'я" FontSize="25" FontWeight="Black"
-                   Margin="27,26,0,0" Foreground="White"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" />
-        <TextBlock Text="Прізвище" FontSize="25" FontWeight="Black"
-                   Margin="27,125,0,0" Foreground="White"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0"/>
-        <TextBlock Text="По батькові" FontSize="25" FontWeight="Black"
-                   Margin="27,10,0,0" Foreground="White"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1"/>
-        <TextBlock Text="Номер телефону" FontSize="25" FontWeight="Black"
-                   Margin="155,32,0,0" Foreground="White"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0"/>
-        <TextBlock Text="Пошта" FontSize="25" FontWeight="Black"
-                   Margin="288,10,0,0" Foreground="White"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"/>
-        <TextBlock Text="Фітнес послуги" FontSize="25" FontWeight="Black"
-                   Margin="179,142,0,0" Foreground="White"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1"/>
 
-        <TextBox x:Name="CoachNameText" FontSize="25" FontWeight="Black"
-                 Margin="10,72,0,0" Foreground="Black"
-                 VerticalAlignment="Top" HorizontalAlignment="Left"
-                 Grid.Column="0" Width="258" Height="48"/>
-        <TextBox x:Name="CoachLastNameText" FontSize="25" FontWeight="Black"
-                 Margin="10,163,0,0" Foreground="Black"
-                 VerticalAlignment="Top" HorizontalAlignment="Left"
-                 Grid.Column="0" Width="258" Height="46"/>
-        <TextBox x:Name="CoachMiddleNameText" FontSize="25" FontWeight="Black"
-                 Margin="10,48,0,0" Foreground="Black"
-                 VerticalAlignment="Top" HorizontalAlignment="Left"
-                 Grid.Column="0" Width="258" Height="46" Grid.Row="1"/>
-        <TextBox x:Name="CoachPhoneNumberText" FontSize="25" FontWeight="Black"
-                 Margin="46,73,0,0" Foreground="Black"
-                 VerticalAlignment="Top" HorizontalAlignment="Left"
-                 Grid.Column="1" Width="344" Height="47"/>
-        <TextBox x:Name="CoachEmailText" FontSize="25" FontWeight="Black"
-                 Margin="46,48,0,0" Foreground="Black"
-                 VerticalAlignment="Top" HorizontalAlignment="Left"
-                 Grid.Column="1" Width="344" Height="47" Grid.Row="1"/>
-        <ComboBox x:Name="ExerciseTypeCbo" HorizontalAlignment="Left"
-                  Height="33" Margin="193,176,0,0" VerticalAlignment="Top"
-                  Width="166" Grid.Column="1"/>
-        <Button Content="Реєстрація" FontSize="25" FontWeight="Black"
-                Foreground="White" Background="DarkRed"
-                Margin="291,121,309,25" Grid.Row="1" Grid.ColumnSpan="2"
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="20,20,10,10">
+            <TextBlock Text="Ім'я" FontSize="20" FontWeight="Bold" 
+                       Foreground="White" Margin="0,0,0,5"/>
+            <TextBox x:Name="CoachNameText" FontSize="18" FontWeight="Normal"
+                     Foreground="Black" Height="35" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,20,20,10">
+            <TextBlock Text="Пошта" FontSize="20" FontWeight="Bold" 
+                       Foreground="White" Margin="0,0,0,5"/>
+            <TextBox x:Name="CoachEmailText" FontSize="18" FontWeight="Normal"
+                     Foreground="Black" Height="39" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,10,10,10">
+            <TextBlock Text="Прізвище" FontSize="20" FontWeight="Bold" 
+                       Foreground="White" Margin="0,0,0,5"/>
+            <TextBox x:Name="CoachLastNameText" FontSize="18" FontWeight="Normal"
+                     Foreground="Black" Height="35" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,10,20,10">
+            <TextBlock Text="Номер телефону" FontSize="20" FontWeight="Bold" 
+                       Foreground="White" Margin="0,0,0,5"/>
+            <TextBox x:Name="CoachPhoneNumberText" FontSize="18" FontWeight="Normal"
+                     Foreground="Black" Height="35" Padding="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="20,10,10,20">
+            <TextBlock Text="По батькові" FontSize="20" FontWeight="Bold" 
+                       Foreground="White" Margin="0,0,0,5"/>
+            <TextBox x:Name="CoachMiddleNameText" FontSize="18" FontWeight="Normal"
+                     Foreground="Black" Height="35" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10,10,20,20">
+            <TextBlock Text="Фітнес послуги" FontSize="20" FontWeight="Bold" 
+                       Foreground="White" Margin="0,0,0,5"/>
+            <ComboBox x:Name="ExerciseTypeCbo" FontSize="16" 
+                      Height="35" Padding="5" Background="White"
+                      VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <Button Content="Реєстрація" 
+                Grid.Row="3" Grid.ColumnSpan="2"
+                FontSize="22" FontWeight="Bold" 
+                Foreground="White" Background="DarkRed" 
+                Height="45" Margin="50,20,50,20"
                 Click="RegistrationCoach_Click"/>
-
         <TextBlock x:Name="txtError"
-                   Grid.Row="2" Grid.ColumnSpan="2"
-                   Margin="10,10,10,10"
-                   FontSize="16"
-                   Foreground="Red"
-                   TextWrapping="Wrap"
-                   TextAlignment="Center"/>
+                   Grid.Row="4" Grid.ColumnSpan="2"
+                   Foreground="Black" FontWeight="Bold" FontSize="16"
+                   Margin="20,10,20,20" TextWrapping="Wrap"
+                   Text="" HorizontalAlignment="Center"
+                   VerticalAlignment="Top" MinHeight="30"/>
     </Grid>
 </Window>

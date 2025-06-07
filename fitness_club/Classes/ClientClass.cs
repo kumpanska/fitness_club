@@ -12,6 +12,6 @@ namespace fitness_club.Classes
         {
             return $"Клієнт: {base.FullName()}";
         }
-        public string FullNameText => FullName();
+        public override string FullNameText => FullName();
     }
 }
