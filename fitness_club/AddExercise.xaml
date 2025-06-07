@@ -1,8 +1,8 @@
 ﻿<Window x:Class="fitness_club.AddExercise"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Додавання вправи" Height="340" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Background="Brown" Margin="0,0,0,-6">
+        Title="Додавання вправи" Height="300" Width="500" MinHeight="250" MinWidth="400">
+    <Grid Background="Brown">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -11,16 +11,16 @@
 
         <StackPanel Grid.Row="0" Margin="0,0,0,10">
             <TextBlock Text="Назва вправи:" Foreground="White"  FontWeight="DemiBold" Margin="0,0,0,5"/>
-            <TextBox Name="ExerciseNameTextBox" Height="30" FontSize="14" Width="489"/>
+            <TextBox Name="ExerciseNameTextBox" Height="30" FontSize="14" Width="296"/>
 
             <TextBlock Text="Тип вправи:" Foreground="White"  FontWeight="DemiBold" Margin="10,10,0,5"/>
-            <ComboBox Name="ExerciseTypeComboBox" Height="30" FontSize="14" Width="490">
+            <ComboBox Name="ExerciseTypeComboBox" Height="30" FontSize="14" Width="297">
             </ComboBox>
 
             <TextBlock Text="Кількість повторень:" FontWeight="DemiBold" Foreground="White" Margin="10,10,0,5"/>
-            <TextBox Name="RepetitionsTextBox" Height="30" FontSize="14" Width="489"/>
+            <TextBox Name="RepetitionsTextBox" Height="30" FontSize="14" Width="296"/>
         </StackPanel>
-
+        <TextBlock Name="txtError" Foreground="White" Margin="10,5,0,0" Grid.Row="1"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
             <Button Content="Додати" Width="100" Margin="5,0" Click="AddButton_Click"/>
             <Button Content="Скасувати" Width="100" Margin="5,0" Click="CancelButton_Click"/>

@@ -46,7 +46,7 @@ namespace fitness_club.Classes
             set { phoneNumber = value; }
         }
         [RegularExpression(@"^[a-z\d]+\@[a-z]+\.[a-z]{2,}$", ErrorMessage = "Електронна пошта має містити лише малі латинські літери (опціонально з цифрами), одну крапку, один знак '@'.")]
-        [StringLength(30,MinimumLength =6, ErrorMessage="Ім'я користувача електронної пошти містить від 6 до 30 символів")]
+        [StringLength(30,MinimumLength =6, ErrorMessage="Ім'я користувача електронної пошти містить від 6 до 30 символів.")]
         public string Email
         {
             get { return email; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,12 @@ namespace fitness_club
                 MessageBox.Show("Кількість повторень вправи має бути додатним числом.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            ExerciseClass exercise = new ExerciseClass { NameOfExercise = name, Type = type, Repetitions = repetitions };
+            if (!ValidateExerciseAttributes(exercise, out string errorMessage))
+            {
+                txtError.Text = errorMessage;
+                return;
+            }
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -84,6 +91,21 @@ namespace fitness_club
         {
             DialogResult = false;
             Close();
+        }
+        private bool ValidateExerciseAttributes(ExerciseClass exercise, out string errorMessage)
+        {
+            var context = new ValidationContext(exercise);
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            bool isValid = Validator.TryValidateObject(exercise, context, results, validateAllProperties: true);
+            if (!isValid)
+            {
+                errorMessage = string.Join(Environment.NewLine, results.Select(r => r.ErrorMessage));
+            }
+            else
+            {
+                errorMessage = string.Empty;
+            }
+            return isValid;
         }
     }
 }
