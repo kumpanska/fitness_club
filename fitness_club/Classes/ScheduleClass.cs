@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace fitness_club.Classes
 {
@@ -39,6 +41,7 @@ namespace fitness_club.Classes
                 date = value;
             }
         }
+        [Range(typeof(TimeSpan),"7:00","21:00",ErrorMessage="Час має бути введений від 7:00 до 21:00")]
         public TimeSpan Time
         {
             get { return time; }

@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using fitness_club.Classes;
 using Microsoft.Data.SqlClient;
-using MySqlX.XDevAPI;
 
 namespace fitness_club
 {

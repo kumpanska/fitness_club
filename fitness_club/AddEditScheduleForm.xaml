@@ -16,22 +16,22 @@
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" 
+        <TextBlock Grid.Row="1" Grid.Column="0" 
                    Text="Фітнес-послуги:" 
                    VerticalAlignment="Center" 
                    FontWeight="DemiBold" 
                    Margin="0,0,10,0"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" 
+        <ComboBox Grid.Row="1" Grid.Column="1" 
                   x:Name="FitnessServiceComboBox" 
                   DisplayMemberPath="Name" 
                   SelectedValuePath="id" 
                   Margin="0,5,132,5"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" 
+        <TextBlock Grid.Row="0" Grid.Column="0" 
                    Text="Тренер:" 
                    VerticalAlignment="Center" 
                    FontWeight="DemiBold" 
                    Margin="0,0,10,0"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" 
+        <ComboBox Grid.Row="0" Grid.Column="1" 
                   x:Name="CoachComboBox" 
                   DisplayMemberPath="FullName" 
                   SelectedValuePath="Id" 

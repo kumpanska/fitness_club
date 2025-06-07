@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Protocols.Configuration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -111,6 +112,21 @@ namespace fitness_club
                 LoadFitnessServices(coachId);
             }
         }
+        private bool ValidateScheduleAttributes(ScheduleClass schedule, out string errorMessage)
+        {
+            var context = new ValidationContext(schedule);
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            bool isValid = Validator.TryValidateObject(schedule, context, results, validateAllProperties: true);
+            if (!isValid)
+            {
+                errorMessage = string.Join(Environment.NewLine, results.Select(r => r.ErrorMessage));
+            }
+            else
+            {
+                errorMessage = string.Empty;
+            }
+            return isValid;
+        }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             if (CoachComboBox.SelectedValue == null || FitnessServiceComboBox.SelectedValue == null || !DatePicker.SelectedDate.HasValue)
@@ -124,30 +140,50 @@ namespace fitness_club
                 MessageBox.Show("Введіть коректний формат часу(HH:MM).");
                 return;
             }
+            ScheduleClass scheduleValidate = new ScheduleClass
+            {
+                Id = schedule.Id,
+                CoachId = (int)CoachComboBox.SelectedValue,
+                Date=DatePicker.SelectedDate.Value,
+                Time=parsedTime,
+                FitnessServicesId=(int)FitnessServiceComboBox.SelectedValue
+            };
+            if (!ValidateScheduleAttributes(scheduleValidate,out string errorMessage))
+            {
+                MessageBox.Show($"{errorMessage}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             int coachId = (int)CoachComboBox.SelectedValue;
             int fitnessServiceId = (int)FitnessServiceComboBox.SelectedValue;
             DateTime date = DatePicker.SelectedDate.Value;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                SqlCommand cmd;
-                if (schedule != null)
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    cmd = new SqlCommand("UPDATE Table_Schedule SET CoachId=@CoachId,Date=@Date,Time=@Time,FitnessServicesId=@FitnessServicesId WHERE Id=@Id", connection);
-                    cmd.Parameters.AddWithValue("@Id", schedule?.Id);
+                    connection.Open();
+                    SqlCommand cmd;
+                    if (schedule != null)
+                    {
+                        cmd = new SqlCommand("UPDATE Table_Schedule SET CoachId=@CoachId,Date=@Date,Time=@Time,FitnessServicesId=@FitnessServicesId WHERE Id=@Id", connection);
+                        cmd.Parameters.AddWithValue("@Id", schedule?.Id);
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand("INSERT INTO Table_Schedule(CoachId,Date,Time,FitnessServicesId) VALUES (@CoachId,@Date,@Time,@FitnessServicesId)", connection);
+
+                    }
+                    cmd.Parameters.AddWithValue("@CoachId", coachId);
+                    cmd.Parameters.AddWithValue("@Date", date);
+                    cmd.Parameters.AddWithValue("@Time", parsedTime);
+                    cmd.Parameters.AddWithValue("@FitnessServicesId", fitnessServiceId);
+                    cmd.ExecuteNonQuery();
+                    DialogResult = true;
                 }
-                else
-                {
-                    cmd = new SqlCommand("INSERT INTO Table_Schedule(CoachId,Date,Time,FitnessServicesId) VALUES (@CoachId,@Date,@Time,@FitnessServicesId)", connection);
-                   
-                }
-                cmd.Parameters.AddWithValue("@CoachId",coachId);
-                cmd.Parameters.AddWithValue("@Date", date);
-                cmd.Parameters.AddWithValue("@Time", parsedTime);
-                cmd.Parameters.AddWithValue("@FitnessServicesId",fitnessServiceId);
-                cmd.ExecuteNonQuery();
             }
-            DialogResult = true;
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Помилка при збереженні: {ex.Message}","Помилка",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {

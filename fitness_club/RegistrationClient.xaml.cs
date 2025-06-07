@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using fitness_club.Classes;
 using Microsoft.Data.SqlClient;
-using Org.BouncyCastle.Crypto.Macs;
 
 namespace fitness_club
 {

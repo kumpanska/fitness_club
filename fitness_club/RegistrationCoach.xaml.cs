@@ -1,6 +1,5 @@
 ﻿using fitness_club.Classes;
 using Microsoft.Data.SqlClient;
-using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
