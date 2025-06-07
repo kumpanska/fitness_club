@@ -22,7 +22,8 @@ namespace fitness_club
     /// </summary>
     public partial class ClientForm : Window
     {
-        private ObservableCollection<Classes.ClientClass> clients = new ObservableCollection<ClientClass>();
+        private ObservableCollection<Classes.ClientClass> allClients = new ObservableCollection<ClientClass>();
+        private ObservableCollection<Classes.ClientClass> filteredClientsBySearch = new ObservableCollection<ClientClass>();
         private ObservableCollection<Classes.CoachClass> coaches = new ObservableCollection<CoachClass>();
         private const string connectionString = "Server=DESKTOP-K1I43VD;Database=master;TrustServerCertificate=True;Trusted_Connection=True";
         public ClientForm()
@@ -56,7 +57,7 @@ namespace fitness_club
         }
         private void LoadClients()
         {
-            clients.Clear();
+            allClients.Clear();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -65,7 +66,7 @@ namespace fitness_club
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    clients.Add(new ClientClass
+                    allClients.Add(new ClientClass
                     {
                         Id = (int)reader["Id"],
                         LastName = reader["Last Name"] as string ?? "",
@@ -73,7 +74,14 @@ namespace fitness_club
                         MiddleName = reader["Middle Name"] as string ?? "",
                     });
                 }
-                ClientComboBox.ItemsSource = clients;
+                filteredClientsBySearch.Clear();
+                foreach (ClientClass client in allClients)
+                {
+                    filteredClientsBySearch.Add(client);
+                }
+                ClientComboBox.ItemsSource = filteredClientsBySearch;
+                ClientComboBox.DisplayMemberPath = "FullNameText";
+                ClientComboBox.SelectedValuePath = "Id";
             }
         }
         private void CoachComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -232,6 +240,41 @@ namespace fitness_club
         {
             DialogResult = false;
             this.Close();
+        }
+
+        private void ClientSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string search = ClientSearch.Text.ToLower().Trim();
+            filteredClientsBySearch.Clear();
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                foreach (ClientClass client in allClients)
+                {
+                    filteredClientsBySearch.Add(client);
+                }
+            }
+            else
+            {
+                foreach (ClientClass client in allClients)
+                {
+                    if (client.LastName.ToLower().Contains(search))
+                    {
+                        filteredClientsBySearch.Add(client);
+                    }
+                }
+            }
+            ClientComboBox.ItemsSource = null;
+            ClientComboBox.ItemsSource = filteredClientsBySearch;
+            if (filteredClientsBySearch.Count == 1)
+            {
+                ClientComboBox.SelectedItem = filteredClientsBySearch[0];
+            }
+            else
+            {
+                ClientComboBox.SelectedItem = null;
+                CoachComboBox.SelectedItem = null;
+                ExerciseListView.Items.Clear();
+            }
         }
     }
 }
