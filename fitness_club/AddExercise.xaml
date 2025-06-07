@@ -10,7 +10,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Назва вправи:" Foreground="White"  FontWeight="DemiBold" Margin="0,0,0,5"/>
+            <TextBlock Text="Назва вправи:" Foreground="White"  FontWeight="DemiBold" Margin="0,0,0,5" Width="485"/>
             <TextBox Name="ExerciseNameTextBox" Height="30" FontSize="14" Width="296"/>
 
             <TextBlock Text="Тип вправи:" Foreground="White"  FontWeight="DemiBold" Margin="10,10,0,5"/>

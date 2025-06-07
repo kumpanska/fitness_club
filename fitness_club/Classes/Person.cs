@@ -39,7 +39,7 @@ namespace fitness_club.Classes
             get { return middleName; }
             set { middleName = value; }
         }
-        [RegularExpression(@"^(?=(?:.*\d){10,15})[\s\d\+]+$", ErrorMessage = "Номер телефону повинен мати цифри, пробіли та знак '+'.")]
+        [RegularExpression(@"^(?=(?:.*\d){12})[\s\d\+]+$", ErrorMessage = "Номер телефону повинен мати 12 цифр, пробіли та знак '+'.")]
         public string PhoneNumber
         {
             get { return phoneNumber; }

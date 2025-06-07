@@ -1,7 +1,9 @@
 ﻿using fitness_club.Classes;
 using Microsoft.Data.SqlClient;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +37,7 @@ namespace fitness_club
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            txtError.Visibility=Visibility.Collapsed;
             string name = ClientNameText.Text.Trim();
             string lastName = ClientLastNameText.Text.Trim();
             string middleName = ClientMiddleNameText.Text.Trim();
@@ -44,6 +47,13 @@ namespace fitness_club
                 string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(email))
             {
                 MessageBox.Show("Заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            ClientClass client = new ClientClass { Name = name, LastName = lastName, MiddleName = middleName,PhoneNumber=phone,Email=email };
+            if (!ValidateClientAttributes(client, out string errorMessage))
+            {
+                txtError.Text = errorMessage;
+                txtError.Visibility = Visibility.Visible;
                 return;
             }
             try
@@ -64,7 +74,7 @@ namespace fitness_club
                     cmd.Parameters.AddWithValue("@Id", clientId);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("Інформацію про тренера оновлено!", "Оновлення інформації", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Інформацію про клієнта оновлено!", "Оновлення інформації", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
                 Close();
             }
@@ -77,6 +87,21 @@ namespace fitness_club
         {
             DialogResult = false;
             Close();
+        }
+        private bool ValidateClientAttributes(ClientClass client, out string errorMessage)
+        {
+            var context = new ValidationContext(client);
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            bool isValid = Validator.TryValidateObject(client, context, results, validateAllProperties: true);
+            if (!isValid)
+            {
+                errorMessage = string.Join(Environment.NewLine, results.Select(r => r.ErrorMessage));
+            }
+            else
+            {
+                errorMessage = string.Empty;
+            }
+            return isValid;
         }
     }
 }

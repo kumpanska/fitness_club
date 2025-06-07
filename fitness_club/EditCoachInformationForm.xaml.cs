@@ -1,7 +1,9 @@
 ﻿using fitness_club.Classes;
 using Microsoft.Data.SqlClient;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +50,7 @@ namespace fitness_club
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            txtError.Visibility = Visibility.Collapsed;
             string name = CoachNameText.Text.Trim();
             string lastName = CoachLastNameText.Text.Trim();
             string middleName = CoachMiddleNameText.Text.Trim();
@@ -58,6 +61,13 @@ namespace fitness_club
        string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(fitnessServices))
             {
                 MessageBox.Show("Заповніть усі поля.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            CoachClass coach = new CoachClass { Name = name, LastName = lastName, MiddleName = middleName, PhoneNumber = phone, Email = email,FitnessServices=fitnessServices};
+            if (!ValidateCoachAttributes(coach, out string errorMessage))
+            {
+                txtError.Text = errorMessage;
+                txtError.Visibility = Visibility.Visible;
                 return;
             }
             try
@@ -94,6 +104,21 @@ namespace fitness_club
         {
             DialogResult = false;
             Close();
+        }
+        private bool ValidateCoachAttributes(CoachClass coach, out string errorMessage)
+        {
+            var context = new ValidationContext(coach);
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            bool isValid = Validator.TryValidateObject(coach, context, results, validateAllProperties: true);
+            if (!isValid)
+            {
+                errorMessage = string.Join(Environment.NewLine, results.Select(r => r.ErrorMessage));
+            }
+            else
+            {
+                errorMessage = string.Empty;
+            }
+            return isValid;
         }
     }
 }

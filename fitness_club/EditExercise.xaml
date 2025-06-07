@@ -9,13 +9,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Назва вправи:" Foreground="White"  FontWeight="DemiBold" Margin="0,0,0,5"/>
+            <TextBlock Text="Назва вправи:" Foreground="White"  FontWeight="DemiBold" Margin="0,0,0,5" Width="479"/>
             <TextBox Name="ExerciseNameTextBox" Height="30" FontSize="14" Width="296"/>
             <TextBlock Text="Тип вправи:" Foreground="White"  FontWeight="DemiBold" Margin="10,10,0,5"/>
             <ComboBox Name="ExerciseTypeComboBox" Height="30" FontSize="14" Width="297">
             </ComboBox>
             <TextBlock Text="Кількість повторень:" FontWeight="DemiBold" Foreground="White" Margin="10,10,0,5"/>
-            <TextBox Name="RepetitionsTextBox" Height="30" FontSize="14" Width="296"/>
+            <TextBox Name="RepetitionsTextBox" Height="30" FontSize="14" Width="294"/>
         </StackPanel>
         <TextBlock Name="txtError" Foreground="White" Margin="10,5,0,0" Grid.Row="1"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
