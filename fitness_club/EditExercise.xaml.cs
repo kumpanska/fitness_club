@@ -87,9 +87,8 @@ namespace fitness_club
                 MessageBox.Show("Помилка при оновленні вправи: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
             Close();
         }
         private bool ValidateExerciseAttributes(ExerciseClass exercise, out string errorMessage)

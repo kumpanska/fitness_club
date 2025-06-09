@@ -82,9 +82,8 @@ namespace fitness_club
                 MessageBox.Show("Помилка при збереженні інформації: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
             Close();
         }
         private bool ValidateClientAttributes(ClientClass client, out string errorMessage)

@@ -44,9 +44,8 @@ namespace fitness_club
         {
             Classes.LoadExerciseTypesClass.LoadExerciseTypesIntoComboBox(ExerciseTypeComboBox);
         }
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
             Close();
         }
 

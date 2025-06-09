@@ -235,10 +235,8 @@ namespace fitness_club
             MessageBox.Show("Оцінку збережено.");
             RatingTextBox.Clear();
         }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
             this.Close();
         }
 

@@ -71,11 +71,11 @@
                     Foreground="White" Background="DarkGreen" 
                     Height="45" Width="120" Margin="10,0"
                     Click="SaveButton_Click"/>
-            <Button Content="Скасувати" 
+            <Button Content="Закрити" 
                     FontSize="20" FontWeight="Bold" 
                     Foreground="White" Background="DarkRed" 
                     Height="45" Width="120" Margin="10,0"
-                    Click="CancelButton_Click"/>
+                    Click="CloseButton_Click"/>
         </StackPanel>
 
         <TextBlock x:Name="txtError"

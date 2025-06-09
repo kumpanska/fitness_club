@@ -54,7 +54,7 @@ namespace fitness_club
                 
             }
         }
-        private void CoachesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ClientsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             bool isItemSelected = ClientsListView.SelectedItem is ClientClass;
             EditButton.IsEnabled = isItemSelected;

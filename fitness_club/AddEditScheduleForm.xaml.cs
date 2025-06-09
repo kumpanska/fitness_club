@@ -185,7 +185,7 @@ namespace fitness_club
                 MessageBox.Show($"Помилка при збереженні: {ex.Message}","Помилка",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

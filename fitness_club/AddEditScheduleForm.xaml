@@ -66,9 +66,9 @@
                     Width="80" 
                     Height="30" 
                     Margin="0,0,10,0"/>
-            <Button Content="Відмінити" 
+            <Button Content="Закрити" 
                     Background="White" 
-                    Click="Cancel_Click" 
+                    Click="Close_Click" 
                     Width="80" 
                     Height="30"/>
         </StackPanel>

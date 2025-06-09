@@ -99,9 +99,8 @@ namespace fitness_club
             }
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
             Close();
         }
         private bool ValidateCoachAttributes(CoachClass coach, out string errorMessage)
