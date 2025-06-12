@@ -34,8 +34,9 @@ namespace fitness_club
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT c.Id AS CoachId, c.AverageMark AS Mark, COUNT(r.Mark) AS RatingCount, c.[Last Name], c.[Name], c.[Middle Name]" +
-                "FROM[Table_Coaches] c LEFT JOIN[Table_Ratings] r ON r.CoachId = c.Id WHERE c.AverageMark IS NOT NULL GROUP BY c.Id, c.AverageMark, c.[Last Name], c.[Name], c.[Middle Name]";
+                string query = "SELECT c.Id AS CoachId, c.AverageMark AS MarkAVG(CAST(r.Mark As DECIMAL(5,2)" +
+                    " AS Mark,COUNT(r.Mark) AS RatingCount,c.[Last Name],c.[Name],c.[Middle Name]" +
+                    " FROM [Table_Ratings] r JOIN [Table_Coaches] c ON r.CoachId=c.Id GROUP BY c.Id, c.[Last Name], c.[Name],c.[Middle Name]";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 SqlDataReader reader = cmd.ExecuteReader();
                 List<Classes.RatingClass> list = new List<Classes.RatingClass>();
