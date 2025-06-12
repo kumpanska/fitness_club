@@ -46,7 +46,7 @@ namespace fitness_club
                     {
                         RatingId = 0,
                         CoachId = (int)reader["CoachId"],
-                        AverageMark = Convert.ToSingle(reader["Mark"]),
+                        AverageMark = (float)Math.Round(Convert.ToSingle(reader["Mark"]),2),
                         LastName = reader["Last Name"] as string ?? "",
                         Name = reader["Name"] as string ?? "",
                         MiddleName = reader["Middle Name"] as string ?? ""

@@ -117,6 +117,9 @@ namespace fitness_club
                         deleteMark.Parameters.AddWithValue("@ClientId", clientId);
                         deleteMark.ExecuteNonQuery();
                         ExerciseListView.Items.Clear();
+                        SqlCommand deleteExercises = new SqlCommand("DELETE FROM Table_ClientsExercises WHERE ClientId=@ClientId", connection);
+                        deleteExercises.Parameters.AddWithValue("@ClientId", clientId);
+                        deleteExercises.ExecuteNonQuery();
                         UpdateCoachRating(coachOldId);
                         UpdateCoachRating(coachNewId);
                     }
