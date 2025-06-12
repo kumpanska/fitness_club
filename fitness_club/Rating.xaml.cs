@@ -34,7 +34,7 @@ namespace fitness_club
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT c.Id AS CoachId, c.AverageMark AS MarkAVG(CAST(r.Mark As DECIMAL(5,2)" +
+                string query = "SELECT c.Id AS CoachId, AVG(CAST(r.Mark As DECIMAL(5,2)))" +
                     " AS Mark,COUNT(r.Mark) AS RatingCount,c.[Last Name],c.[Name],c.[Middle Name]" +
                     " FROM [Table_Ratings] r JOIN [Table_Coaches] c ON r.CoachId=c.Id GROUP BY c.Id, c.[Last Name], c.[Name],c.[Middle Name]";
                 SqlCommand cmd = new SqlCommand(query, connection);
