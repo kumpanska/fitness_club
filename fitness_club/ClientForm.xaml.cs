@@ -120,8 +120,6 @@ namespace fitness_club
                         SqlCommand deleteExercises = new SqlCommand("DELETE FROM Table_ClientsExercises WHERE ClientId=@ClientId", connection);
                         deleteExercises.Parameters.AddWithValue("@ClientId", clientId);
                         deleteExercises.ExecuteNonQuery();
-                        UpdateCoachRating(coachOldId);
-                        UpdateCoachRating(coachNewId);
                     }
                     else { CoachComboBox.SelectedValue = coachOldId; }
                 }
@@ -175,25 +173,6 @@ namespace fitness_club
 
             }
         }
-        private void UpdateCoachRating(int coachId)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand cmd = new SqlCommand("SELECT AVG(CAST(Mark AS DECIMAL(5,2))) FROM Table_Ratings WHERE CoachId=@CoachId", connection);
-                cmd.Parameters.AddWithValue("@CoachId", coachId);
-                var average = cmd.ExecuteScalar();
-                decimal avgValue = 0;
-                if (average != null && average != DBNull.Value)
-                {
-                    avgValue = Convert.ToDecimal(average);
-                }
-                SqlCommand updateCmd = new SqlCommand("UPDATE Table_Coaches SET AverageMark = @Average WHERE Id = @CoachId", connection);
-                updateCmd.Parameters.AddWithValue("@Average", avgValue);
-                updateCmd.Parameters.AddWithValue("@CoachId", coachId);
-                updateCmd.ExecuteNonQuery();
-            }
-        }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (ClientComboBox.SelectedValue == null || CoachComboBox.SelectedValue == null)
@@ -233,8 +212,6 @@ namespace fitness_club
                     insertCmd.ExecuteNonQuery();
                 }
             }
-
-            UpdateCoachRating(coachId);
             MessageBox.Show("Оцінку збережено.");
             RatingTextBox.Clear();
         }
